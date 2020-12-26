@@ -28,7 +28,7 @@ public abstract class Users {
     
     
     
-    public abstract void searchForBook();
-    public abstract void searchForUser();
+      public abstract int searchForBook(String bookName,int index,Books[]book);
+    public abstract int searchForUser(int memberID,Readers[] reader,Librarians[] admin);
     public abstract void rent(String name,Books[]book,int index);
 }

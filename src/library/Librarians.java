@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Library;
+package library;
 
 import java.util.Scanner;
 import java.time.*;
@@ -33,7 +33,7 @@ public class Librarians extends Users {
        this.rentDate=rentDate;
         this.Deadline_Date=Deadline_Date;
     }
-      public void Admin_page(int index,Librarians[]admin,Books[]book)
+      public void Admin_page(int userIndex,Readers[] reader,Librarians[] admin,Books[]book)
       {
           int option1;
           Scanner input =new Scanner(System.in);
@@ -58,46 +58,48 @@ public class Librarians extends Users {
              else if(option1==3)
              {
                       System.out.println("PLEASE ENTER BOOK NAME");
-                      String name=input.next(); 
-                      System.out.println("TO VIEW DETAILS PRESS 1");
-                      System.out.println("TO REMOVE THE BOOK PRESS 2");                     
-                      System.out.println("TO RENT THE BOOK PRESS 3");
+                      String bookName=input.nextLine();
+                      int bookIndex=searchForBook(Book_name, userIndex, book);
+                      
+                      System.out.println("TO REMOVE THE BOOK PRESS 1");                     
+                      System.out.println("TO RENT THE BOOK PRESS 2");
                       option1=input.nextInt();
                       if(option1==1)
                       {
-                        //call view details function  
+                        //call remove function
                       }
                       else if(option1==2)
                       {
-                          //call remove function
+                            //admin[0].rent();
+                         admin[userIndex].rent(bookName, book,bookIndex);
                       }
-                      else if(option1==3)
-                      {
-                          //admin[0].rent();
-                         admin[index].rent(name, book, index);
-                      }
+                     
                   }
                   else if(option1==4)
                   {
-                      System.out.println("PLEASE ENTER MEMBER NAME");
-                        //variable
-                      System.out.println("TO VIEW INFORMATIONS PRESS 1");
-                      System.out.println("TO REMOVE THE USER PRESS 2");                     
-                      System.out.println("TO BLOCK THE USER PRESS 3");
-                      option1=input.nextInt();
-                      if(option1==1)
-                      {
-                        //call view info function  
-                      }
-                      else if(option1==2)
-                      {
-                          //call remove function
-                      }
-                      else if(option1==3)
-                      {
-                         //call block function 
-                      }
-                  }
+                    System.out.println("PLEASE ENTER MEMBER'S ID");
+                    int memberID=input.nextInt();
+                    int memberIndex=searchForUser(memberID,reader,admin);
+                
+                    if(memberIndex==-1)
+                    {
+                       System.out.println("NO MEMBER FOUND");
+                    }
+                   
+                    System.out.println("TO REMOVE THE USER PRESS 1");                     
+                    System.out.println("TO BLOCK THE USER PRESS 2");
+                    option1=input.nextInt();
+                
+                    if(option1==1)
+                    {
+                       //call remove function 
+                    }
+                    else if(option1==2)
+                    {
+                       //call block function
+                    }
+                   
+                 }
              
             
             else if(option1==5)
@@ -199,14 +201,90 @@ public class Librarians extends Users {
         }
     }
     @Override
-     public void searchForBook()
+      public int searchForBook(String bookName,int index,Books[]book)
     {
-        
+        int bookIndex=-1;
+        for(int i=0;i<200;i++)
+        {
+            if(bookName.equals(book[i].Name))
+            {
+                bookIndex=i;
+                System.out.println("Book Name: "+book[bookIndex].Name+"\t"+"Quantity: "+book[bookIndex].quantity+"\t"+"Type: "+book[bookIndex].type);
+                System.out.println("                              -------------------------------                              ");
+                break;
+            }
+        }
+       
+        return bookIndex;
     }
      
      @Override
-      public void searchForUser()
+      public int searchForUser(int memberID,Readers[] reader,Librarians[] admin)
     {
+       int memberIndex=-1;
+        for(int i=0;i<100;i++)
+        {
+            if(memberID==reader[i].ID)
+            {
+                memberIndex=i;
+                System.out.println("Member's ID: "+reader[i].ID);
+                System.out.println("Member's Name: "+reader[i].firstName+" "+reader[i].lastName);
+                System.out.println("Member's Email: "+reader[i].Email);
+                System.out.println("Member's Address: "+reader[i].address);
+                System.out.println("Member's Phone Number: "+reader[i].cellPhone);
+                System.out.println("Member's Status:");
+                if(reader[i].isBlocked==true)
+                {
+                    System.out.println("\t"+"Blocked");
+                }
+                else
+                {
+                    System.out.println("\t"+"Not Blocked");
+                }
+                
+                if(reader[i].isRent==true)
+                {
+                    System.out.println("\t"+"Already Rented a Book (Book Name: "+reader[i].Book_name+", Rent Date: "+reader[i].rentDate+", Deadline: "+reader[i].Deadline_Date+") ");
+                }
+                else
+                {
+                    System.out.println("\t"+"Not Rented a Book");
+                }
+                
+                break;
+            }
+            
+            else if(memberID==admin[i].ID)
+            {
+                memberIndex=i;
+                System.out.println("Member's ID: "+reader[i].ID+"   (Admin)");
+                System.out.println("Member's Name: "+reader[i].firstName+" "+reader[i].lastName);
+                System.out.println("Member's Email: "+reader[i].Email);
+                System.out.println("Member's Address: "+reader[i].address);
+                System.out.println("Member's Phone Number: "+reader[i].cellPhone);
+                System.out.println("Member's Status:");
+                if(reader[i].isBlocked==true)
+                {
+                    System.out.println("\t"+"Blocked");
+                }
+                else
+                {
+                    System.out.println("\t"+"Not Blocked");
+                }
+                
+                if(reader[i].isRent==true)
+                {
+                    System.out.println("\t"+"Already Rented a Book (Book Name: "+reader[i].Book_name+", Rent Date: "+reader[i].rentDate+", Deadline: "+reader[i].Deadline_Date+") ");
+                }
+                else
+                {
+                    System.out.println("\t"+"Not Rented a Book");
+                }
+                
+                break;
+            }
+        }
         
+        return memberIndex;
     }
 }

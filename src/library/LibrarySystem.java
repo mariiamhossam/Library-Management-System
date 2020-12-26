@@ -1,0 +1,124 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Library;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author yosef
+ */
+public class LibrarySystem {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       
+       Librarians admin[]=new Librarians[5];
+       
+       //initialization of librarians
+       admin[0]=new Librarians(1,"admin1@admn.com","1111","Librarians","Ahmed","Hassan",
+               "ABC","201078496455",false,false,null,null,null); 
+       
+       admin[1]=new Librarians(2, "admin2@admn.com", "2222", "librarian", "Ali", "Mohamed",
+               "XYZ", "201123947957", false,false,null,null,null);
+       
+       admin[2]=new Librarians(3, "admin3@admn.com", "3333", "librarian", "Mohamed", "Fathy",
+               "LMN", "201038774654", false,false,null,null,null);
+       
+       admin[3]=new Librarians(4, "admin4@admn.com", "4444", "librarian", "Sara", "Ahmed",
+               "DFG", "201118476563", false,false,null,null,null);
+       
+       admin[4]=new Librarians(5, "admin5@admn.com", "5555", "librarian", "Soha", "Akram",
+               "XXX", "201038365454", false,false,null,null,null);
+       
+       
+       Readers reader[]=new Readers[100];
+       
+       //initialization of readers
+       reader[0]=new Readers(11, "karim11@reader.com", "karim11", "reader", "Karim", "Hossam",
+               "ZZZ", "201038736863", false,false,null,null,null);
+       
+       reader[1]=new Readers(22, "mona22@reader.com", "mona22", "reader", "Mona", "Hamdy",
+               "KLM", "201118635423", true,false,null,null,null);
+       
+       reader[2]=new Readers(33, "khaled33@reader.com", "khaled33", "reader", "Khaled", "Hassan",
+               "YYY", "201003786652", true,false,null,null,null);
+       
+       reader[3]=new Readers(44, "amr44@reader.com", "amr44", "reader", "Amr", "Ahmed", 
+               "FGH", "201019373545", false,false,null,null,null);
+       
+       reader[4]=new Readers(55, "omar55@reader.com", "omar55", "reader", "Omar", "Ashraf",
+               "FFF", "201138663524", false,false,null,null,null);
+       
+       
+        Books book[]=new Books[200];
+        
+        //initialization of books
+        //book[0]=new Books("Harry Potter", 20, "fantasy"); 
+        
+        
+        
+        while(true)
+        {
+           String Email,password;
+           Scanner input =new Scanner(System.in);
+           System.out.println("                                     * WELCOME TO LIBRARY SYSTEM*                ");
+           System.out.println("Please enter your Email and password to log in");
+           System.out.print("Email: ");
+           Email=input.next();
+           System.out.print("password: ");
+           password=input.next();
+        
+           Librarians lib=new Librarians();
+           Readers r =new Readers();
+           
+           int index;
+           boolean isFound=false;
+      
+           for(int i=0;i<100;i++)
+           {
+               if(Email.equals(reader[i].Email)&&password.equals(reader[i].password))
+               {   
+                   isFound=true;
+                   index=i;
+                   r.Reader_page(index,reader,book);
+                   
+                   break;
+               }
+               
+               
+           }
+        
+          if(isFound==false)
+           {
+               for(int i=0;i<5;i++)
+             {
+                 System.out.println("hiii");
+               if(Email.equals(admin[i].Email)&&password.equals(admin[i].password))
+               {
+                   index=i;
+                   lib.Admin_page(index,admin,book);
+                   break;
+               }
+             }
+           }
+          
+          if(isFound==false)
+          {
+              System.out.println("INCORRECT EMAIL OR PASSWORD! PLEASE TRY AGAIN");
+          }
+          
+        
+    }
+        
+        
+    
+
+    }
+        
+    }

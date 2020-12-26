@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Library;
+package library;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -33,57 +33,71 @@ public class Readers extends Users {
        this.rentDate=rentDate;
        this.Deadline_Date=Deadline_Date;
     }
-     public void Reader_page(int index,Readers reader[],Books[]book)
+     public void Reader_page(int userIndex,Readers[] reader,Librarians[] admin,Books[]book)
      {
          int option1;
           Scanner input =new Scanner(System.in);
           while(true){
             System.out.println("                                  WELCOME TO READER PAGE                               ");
             System.out.println("SEARCH FOR A BOOK PRESS 1");
-            System.out.println("SEARCH FOR A USER PRESS 2");
+            System.out.println("SEARCH FOR A MEMBER PRESS 2");
             System.out.println("LOG OUT PRESS 3");
              option1=input.nextInt();
              if(option1==1)
              {
-                      System.out.println("PLEASE ENTER BOOK NAME");
-                     String name=input.next();
-                     //call search for the book index function
-                      System.out.println("VIEW BOOK INFORMATION PRESS 1");                     
-                      System.out.println("RENT THE BOOK PRESS 2");
-                      System.out.println("RETURN THE BOOK PRESS 2");
-                      option1=input.nextInt();
-                      if(option1==1)
-                      {
-                        //call view book info function  
-                      }
-                      else if(option1==2)
-                      {
-                             Boolean isblocked=Check_isBlocked();
-                          if(isblocked)
-                          {
-                              System.out.println("sorry, you can't rent the book because you are blocked!");
-                          }
-                          Boolean isrented=Check_isRentedBefore();
-                          if(isrented)
-                          {
-                              System.out.println("sorry, you can't rent more than one book");
-                          }
-                          else{
-                          reader[index].rent(name,book,index);
-                          }
-                      }
-                      else if(option1==3)
-                      {
-                         //call return function
-                      }
-                  }
-                  else if(option1==2)
-                  {
-                      System.out.println("PLEASE ENTER USER NAME");
-                        //variable
-                        //call view user's data function 
+                System.out.println("PLEASE ENTER BOOK NAME");
+                String bookName=input.nextLine();
+                int bookIndex=searchForBook(bookName, userIndex, book);
+                if(bookIndex==-1)
+                {
+                    System.out.println("NO BOOK FOUND");
+                }
+                     
+                                   
+                System.out.println("RENT THE BOOK PRESS 1");
+                System.out.println("RETURN THE BOOK PRESS 2");
+                option1=input.nextInt();
+                if(option1==1)
+                {
+                   
+                    Boolean isblocked=Check_isBlocked();
+                    if(isblocked)
+                    {
+                        System.out.println("sorry, you can't rent the book because you are blocked!");
+                    }
+     
+                    Boolean isrented=Check_isRentedBefore();
+                    if(isrented)
+                    {
+                        System.out.println("sorry, you can't rent more than one book");
+                    }
+                    else
+                    {
+                        reader[userIndex].rent(bookName,book,bookIndex);
+                     }
+                }
+                   
+                else if(option1==2)
+                {
+                    //call return function
+                }
+                   
+            }
+          
+            else if(option1==2)
+            {
+                System.out.println("PLEASE ENTER MEMBER'S ID");
+                int memberID=input.nextInt();
+                int memberIndex=searchForUser(memberID,reader,admin);
+                
+                if(memberIndex==-1)
+                {
+                    System.out.println("NO MEMBER FOUND");
+                }
+                
                     
-                  }
+            }
+            
              else if(option1==3)
             {
                 break;
@@ -145,15 +159,52 @@ public class Readers extends Users {
         }
         
     
+   
     @Override
-     public void searchForBook()
+     public int searchForBook(String bookName,int index,Books[]book) 
     {
-        
-    }
+        int bookIndex=-1;
+        for(int i=0;i<200;i++)
+        {
+            if(bookName.equals(book[i].Name))
+            {
+                bookIndex=i;
+                System.out.println("Book Name: "+book[bookIndex].Name+"\t"+"Quantity: "+book[bookIndex].quantity+"\t"+"Type: "+book[bookIndex].type);
+                System.out.println("                              -------------------------------                              ");
+                break;
+            }
+        }
+       
+        return bookIndex;
+    }   
+
+   
      
-     @Override
-      public void searchForUser()
+      @Override
+      public int searchForUser(int memberID,Readers[] reader,Librarians[] admin)
     {
+        int memberIndex=-1;
+        for(int i=0;i<100;i++)
+        {
+            if(memberID==reader[i].ID)
+            {
+                memberIndex=i;
+                System.out.println("Member's ID: "+reader[i].ID);
+                System.out.println("Member's Name: "+reader[i].firstName+" "+reader[i].lastName);
+                System.out.println("Member's Email: "+reader[i].Email);
+                break;
+            }
+            
+            else if(memberID==admin[i].ID)
+            {
+                memberIndex=i;
+                System.out.println("Member's ID: "+admin[i].ID+"   (Admin)");
+                System.out.println("Member's Name: "+admin[i].firstName+" "+admin[i].lastName);
+                System.out.println("Member's Email: "+admin[i].Email);
+                break;
+            }
+        }
         
+        return memberIndex;
     }
 }

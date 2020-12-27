@@ -51,10 +51,32 @@ public class Librarians extends Users {
             {
                 //call add_book function
             } 
-            else if (option1 == 2)
-            {
-                //call add_user function
-            } else if (option1 == 3) 
+            else if(option1==2)
+             {
+                
+                 //call add_user function
+                 int addindx;
+                 String answer;
+                 for(int i=0;i<100;i++){
+                     addindx=i;
+                    if(reader[i]==null)
+                    {
+                     reader[i]=new Readers();
+                        add_user(reader,addindx);
+                         System.out.println("DO YOU WANT TO CONTINUE: yes/no");
+                    answer=input2.next();
+                    if(answer.equals("no")){
+                        break;
+                    }
+                    }
+                    
+                     
+                     
+                 }
+                 
+             }
+
+            else if (option1 == 3) 
             {
                 System.out.println("PLEASE ENTER BOOK NAME:");
                 String bookName = input.nextLine();
@@ -154,8 +176,35 @@ public class Librarians extends Users {
 
     }
 
-    public void add_user() {
-
+    Scanner input2=new Scanner(System.in);
+    public void add_user(Readers[]r,int indx){
+        //we add readers only 
+        
+        for(int i=indx;i<100;indx++){
+        System.out.println("PLEASE ENTER THE USER ID: ");
+       
+        r[indx].ID=input2.nextInt();
+        
+        System.out.println("PLEASE ENTER THE USER EMAIL: ");
+       
+        r[indx].Email=input2.next();
+        System.out.println("PLEASE ENTER THE USER PASSWORD: ");
+        r[indx].password=input2.next();
+        r[indx].type="READER";
+        System.out.println("PLEAE ENTER THE USER FIRST NAME: ");
+        r[indx].firstName=input2.next();
+        System.out.println("PLEASE ENTER THE USER LAST NAME: ");
+        r[indx].lastName=input2.next();
+        System.out.println("PLEASE ENTER THE USER ADDRESS: ");
+        r[indx].address=input2.next();
+        System.out.println("PLEASE ENTER THE USER CELL PHONE : ");
+        r[indx].cellPhone=input2.next();
+        r[indx].isBlocked=false;
+        r[indx].Book_name=null;
+        r[indx].rentDate=null;
+        r[indx].Deadline_Date=null;
+        break;
+        }
     }
 
     public void remove_user() {

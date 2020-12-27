@@ -403,7 +403,7 @@ public class Librarians extends Users {
             {
                 memberIndex=i;
                 System.out.println("Member's ID: "+admin[i].ID+"   (Admin)");
-                System.out.println("Member's Name: "+admin[i].firstName+" "+reader[i].lastName);
+                System.out.println("Member's Name: "+admin[i].firstName+" "+admin[i].lastName);
                 System.out.println("Member's Email: "+admin[i].Email);
                 System.out.println("Member's Address: "+admin[i].address);
                 System.out.println("Member's Phone Number: "+admin[i].cellPhone);
@@ -419,7 +419,7 @@ public class Librarians extends Users {
                 
                 if(admin[i].isRent==true)
                 {
-                    System.out.println("\t"+"Already Rented a Book (Book Name: "+reader[i].Book_name+", Rent Date: "+reader[i].rentDate+", Deadline: "+reader[i].Deadline_Date+") ");
+                    System.out.println("\t"+"Already Rented a Book (Book Name: "+admin[i].Book_name+", Rent Date: "+admin[i].rentDate+", Deadline: "+admin[i].Deadline_Date+") ");
                 }
                 else
                 {

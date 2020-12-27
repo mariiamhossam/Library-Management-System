@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package library;
+package Library;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -39,23 +39,23 @@ public class Readers extends Users {
           Scanner input =new Scanner(System.in);
           while(true){
             System.out.println("                                  WELCOME TO READER PAGE                               ");
-            System.out.println("SEARCH FOR A BOOK PRESS 1");
-            System.out.println("SEARCH FOR A MEMBER PRESS 2");
-            System.out.println("LOG OUT PRESS 3");
+            System.out.println("TO SEARCH FOR A BOOK PRESS 1");
+            System.out.println("TO SEARCH FOR A MEMBER PRESS 2");
+            System.out.println("TO LOG OUT PRESS 3");
              option1=input.nextInt();
              if(option1==1)
              {
-                System.out.println("PLEASE ENTER BOOK NAME");
+                System.out.println("PLEASE ENTER BOOK NAME:");
                 String bookName=input.nextLine();
                 int bookIndex=searchForBook(bookName, userIndex, book);
                 if(bookIndex==-1)
                 {
                     System.out.println("NO BOOK FOUND");
                 }
-                     
-                                   
-                System.out.println("RENT THE BOOK PRESS 1");
-                System.out.println("RETURN THE BOOK PRESS 2");
+                    
+                else{                
+                System.out.println("TO RENT THE BOOK PRESS 1");
+                System.out.println("TO RETURN THE BOOK PRESS 2");
                 option1=input.nextInt();
                 if(option1==1)
                 {
@@ -81,12 +81,12 @@ public class Readers extends Users {
                 {
                     //call return function
                 }
-                   
+             }
             }
           
             else if(option1==2)
             {
-                System.out.println("PLEASE ENTER MEMBER'S ID");
+                System.out.println("PLEASE ENTER MEMBER'S ID:");
                 int memberID=input.nextInt();
                 int memberIndex=searchForUser(memberID,reader,admin);
                 
@@ -111,18 +111,18 @@ public class Readers extends Users {
      
     
      @Override
-       public void rent(String name,Books[]book,int index)
+       public void rent(String name,Books[]book,int bookIndex)
     {
         
         
-        if(book[0].quantity>0)
+        if(book[bookIndex].quantity>0)
         {
         isRent=true;
         Book_name=name;
         rentDate=LocalDate.now();
         LocalDate deadline=rentDate.plusDays(7);
         Deadline_Date=deadline;
-        book[0].quantity--;
+        book[bookIndex].quantity--;
         }
         else
         {
@@ -136,9 +136,8 @@ public class Readers extends Users {
         }
         
        
-       
-       
        }
+       @Override
     public Boolean Check_isBlocked(){
     
      if(isBlocked==true)
@@ -148,6 +147,7 @@ public class Readers extends Users {
      else
          return false;
     }
+    @Override
         public boolean Check_isRentedBefore()
         {
             if(isRent==true)
@@ -158,7 +158,11 @@ public class Readers extends Users {
             return false;
         }
         
-    
+    @Override
+    public void Return()
+    {
+        
+    }
    
     @Override
      public int searchForBook(String bookName,int index,Books[]book) 

@@ -399,26 +399,33 @@ public class Librarians extends Users {
                 }
 
                 break;
-            } else if (memberID == admin[i].ID) {
-                memberIndex = i;
-                System.out.println("Member's ID: " + reader[i].ID + "   (Admin)");
-                System.out.println("Member's Name: " + reader[i].firstName + " " + reader[i].lastName);
-                System.out.println("Member's Email: " + reader[i].Email);
-                System.out.println("Member's Address: " + reader[i].address);
-                System.out.println("Member's Phone Number: " + reader[i].cellPhone);
+            } else if(memberID==admin[i].ID)
+            {
+                memberIndex=i;
+                System.out.println("Member's ID: "+admin[i].ID+"   (Admin)");
+                System.out.println("Member's Name: "+admin[i].firstName+" "+reader[i].lastName);
+                System.out.println("Member's Email: "+admin[i].Email);
+                System.out.println("Member's Address: "+admin[i].address);
+                System.out.println("Member's Phone Number: "+admin[i].cellPhone);
                 System.out.println("Member's Status:");
-                if (reader[i].isBlocked == true) {
-                    System.out.println("\t" + "Blocked");
-                } else {
-                    System.out.println("\t" + "Not Blocked");
+                if(admin[i].isBlocked==true)
+                {
+                    System.out.println("\t"+"Blocked");
                 }
-
-                if (reader[i].isRent == true) {
-                    System.out.println("\t" + "Already Rented a Book (Book Name: " + reader[i].Book_name + ", Rent Date: " + reader[i].rentDate + ", Deadline: " + reader[i].Deadline_Date + ") ");
-                } else {
-                    System.out.println("\t" + "Not Rented a Book");
+                else
+                {
+                    System.out.println("\t"+"Not Blocked");
                 }
-
+                
+                if(admin[i].isRent==true)
+                {
+                    System.out.println("\t"+"Already Rented a Book (Book Name: "+reader[i].Book_name+", Rent Date: "+reader[i].rentDate+", Deadline: "+reader[i].Deadline_Date+") ");
+                }
+                else
+                {
+                    System.out.println("\t"+"Not Rented a Book");
+                }
+                
                 break;
             }
         }

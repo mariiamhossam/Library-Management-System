@@ -41,19 +41,19 @@ public class LibrarySystem {
        
        //initialization of readers
        reader[0]=new Readers(11, "karim11@reader.com", "karim11", "reader", "Karim", "Hossam",
-               "ZZZ", "201038736863", false,false,null,null,null);
+               "ZZZ", "01091751184", false,false,null,null,null);
        
        reader[1]=new Readers(22, "mona22@reader.com", "mona22", "reader", "Mona", "Hamdy",
-               "KLM", "201118635423", true,false,null,null,null);
+               "KLM", "01001234567", true,false,null,null,null);
        
        reader[2]=new Readers(33, "khaled33@reader.com", "khaled33", "reader", "Khaled", "Hassan",
-               "YYY", "201003786652", true,false,null,null,null);
+               "YYY", "01234567896", true,false,null,null,null);
        
        reader[3]=new Readers(44, "amr44@reader.com", "amr44", "reader", "Amr", "Ahmed", 
-               "FGH", "201019373545", false,false,null,null,null);
+               "FGH", "01167854378", false,false,null,null,null);
        
        reader[4]=new Readers(55, "omar55@reader.com", "omar55", "reader", "Omar", "Ashraf",
-               "FFF", "201138663524", false,false,null,null,null);
+               "FFF", "014456565662", false,false,null,null,null);
        
        
         Books book[]=new Books[200];

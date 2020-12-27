@@ -176,11 +176,11 @@ public class Librarians extends Users {
 
     }
 
-    Scanner input2=new Scanner(System.in);
+   Scanner input2=new Scanner(System.in);
     public void add_user(Readers[]r,int indx){
         //we add readers only 
         
-        for(int i=indx;i<100;indx++){
+        
         System.out.println("PLEASE ENTER THE USER ID: ");
        
         r[indx].ID=input2.nextInt();
@@ -203,8 +203,8 @@ public class Librarians extends Users {
         r[indx].Book_name=null;
         r[indx].rentDate=null;
         r[indx].Deadline_Date=null;
-        break;
-        }
+        
+        
     }
 
     public void remove_user() {
@@ -368,3 +368,4 @@ public class Librarians extends Users {
         return memberIndex;
     }
 }
+

@@ -28,7 +28,10 @@ public abstract class Users {
     
     
     
-      public abstract int searchForBook(String bookName,int index,Books[]book);
+    public abstract int searchForBook(String bookName,int index,Books[]book);
     public abstract int searchForUser(int memberID,Readers[] reader,Librarians[] admin);
-    public abstract void rent(String name,Books[]book,int index);
+    public abstract void rent(String name,Books[]book,int bookIndex);
+    public abstract Boolean Check_isBlocked();
+    public abstract boolean Check_isRentedBefore();
+    public abstract void Return();
 }

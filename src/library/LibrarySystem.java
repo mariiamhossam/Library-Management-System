@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package library;
+package Library;
 
 import java.util.Scanner;
 
@@ -79,12 +79,27 @@ public class LibrarySystem {
            
            int userIndex;
            boolean isFound=false;
+             for(int i=0;i<5;i++)
+             {
+                 
+               if(Email.equals(admin[i].Email)&&password.equals(admin[i].password))
+               {    
+                   isFound=true;
+                   userIndex=i;
+                   lib.Admin_page(userIndex,reader,admin,book);
+                   break;
+               }
+             }
       
-           for(int i=0;i<100;i++)
+         
+        
+          if(isFound==false)
+           {
+                for(int i=0;i<100;i++)
            {
                if(Email.equals(reader[i].Email)&&password.equals(reader[i].password))
                {   
-                   isFound=true;
+                   
                    userIndex=i;
                    r.Reader_page(userIndex,reader,admin,book);
                    
@@ -93,19 +108,6 @@ public class LibrarySystem {
                
                
            }
-        
-          if(isFound==false)
-           {
-               for(int i=0;i<5;i++)
-             {
-                 System.out.println("hiii");
-               if(Email.equals(admin[i].Email)&&password.equals(admin[i].password))
-               {
-                   userIndex=i;
-                   lib.Admin_page(userIndex,reader,admin,book);
-                   break;
-               }
-             }
            }
           
           if(isFound==false)
@@ -116,9 +118,6 @@ public class LibrarySystem {
         
     }
         
-        
-    
-
     }
         
     }

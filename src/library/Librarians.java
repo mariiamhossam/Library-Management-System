@@ -14,7 +14,7 @@ import java.time.*;
  */
 public class Librarians extends Users {
 
-    public Librarians() {
+   public Librarians() {
     }
 
     public Librarians(int ID, String Email, String password, String type, String firstName, String lastName,
@@ -177,19 +177,48 @@ public class Librarians extends Users {
     }
 
    Scanner input2=new Scanner(System.in);
-    public void add_user(Readers[]r,int indx){
-        //we add readers only 
-        
-        
+   public void add_user(Readers[]r,int indx){
         System.out.println("PLEASE ENTER THE USER ID: ");
-       
         r[indx].ID=input2.nextInt();
-        
-        System.out.println("PLEASE ENTER THE USER EMAIL: ");
        
+        while(true){
+            int count=0;
+            for(int i=0;i<indx;i++){
+               
+                if(r[indx].ID==r[i].ID){
+                    count=1;
+                    break;
+                }
+            }
+            if(count==1){
+                System.out.println("PLEASE ENTER ANOTHER ID AS IT IS ALREADY FOUND: ");
+                r[indx].ID=input2.nextInt();
+            }
+            else if(count==0){
+                break;
+            }
+        }
+        System.out.println("PLEASE ENTER THE USER EMAIL: ");
         r[indx].Email=input2.next();
         System.out.println("PLEASE ENTER THE USER PASSWORD: ");
         r[indx].password=input2.next();
+        while(true){
+            int count1=0;
+        for(int i=0;i<indx;i++){
+            String pass=r[i].password;
+         if(r[indx].password.equals(pass)){
+         count1=1;
+         break;
+         }   
+        }
+        if(count1==1){
+            System.out.println(("PLEASE ENTER ANOTHER PAssword: "));
+            r[indx].password=input2.next();
+        }
+        else if(count1==0){
+            break;
+        }
+        }
         r[indx].type="READER";
         System.out.println("PLEAE ENTER THE USER FIRST NAME: ");
         r[indx].firstName=input2.next();
@@ -199,13 +228,42 @@ public class Librarians extends Users {
         r[indx].address=input2.next();
         System.out.println("PLEASE ENTER THE USER CELL PHONE : ");
         r[indx].cellPhone=input2.next();
+        int length;
+        
+        
+        while(true){
+            length=r[indx].cellPhone.length();
+            if(length!=11){
+             System.out.println("PLEASE ENTER A CORRECT NUMBER PHONE NOT LESS THAN 11 DIGITS AND NOT MORE THAN 11: ");
+             r[indx].cellPhone=input2.next();
+            }
+            else if(length==11){
+                break;
+            }
+        }
+        
+        while(true){
+            char c1='0';
+        char c=r[indx].cellPhone.charAt(0);
+        if(c!=c1){
+         System.out.println("PLEASE ENTER ANOTHE PHONE NUMBER STARTS WITH ZERO: ");
+         r[indx].cellPhone=input2.next();
+        }
+        else if(c==c1){
+            break;
+        }
+        }
         r[indx].isBlocked=false;
         r[indx].Book_name=null;
         r[indx].rentDate=null;
         r[indx].Deadline_Date=null;
+        }
+    
+
+               
+           
         
-        
-    }
+    
 
     public void remove_user() {
 
@@ -368,4 +426,3 @@ public class Librarians extends Users {
         return memberIndex;
     }
 }
-

@@ -49,7 +49,23 @@ public class Librarians extends Users {
             option1 = input.nextInt();
             if (option1 == 1)
             {
-                //call add_book function
+                
+                //call add_book functin
+                int nxt_book;
+                for(int i=0;i<200;i++) {
+                nxt_book=i;
+                if(book[i]==null) {
+                book[i]=new Books();
+                add_book(book,nxt_book);
+                 System.out.println(" DO You want to Continue? yes/no ");
+                 String ans;
+                    ans=input.next();
+                    if(ans.equals("no")){
+                        break;
+                    }
+                }
+                }
+                 
             } 
             else if(option1==2)
              {
@@ -88,7 +104,14 @@ public class Librarians extends Users {
                 option1 = input.nextInt();
                 if (option1 == 1)
                 {
-                    //call remove function
+                     //call remove function
+                    remove_book(book);
+                      System.out.println(" DO You want to Continue? yes/no ");
+                 String ans;
+                    ans=input.next();
+                    if(ans.equals("no")){
+                        break;
+                    }
                 } else if (option1 == 2) 
                 {
 
@@ -167,15 +190,38 @@ public class Librarians extends Users {
 
         }
     }
-
-    public void add_book() {
-
+ public void add_book(Books[]book,int nxt_book) {
+        String Name,type;
+        int quantity;
+        Scanner input=new Scanner(System.in);
+        System.out.println("Please Enter Book's Name,Quantity and Type");
+        System.out.println("Name:");
+        book[nxt_book].Name=input.next();
+        System.out.println("Quantity:");
+        book[nxt_book].quantity=input.nextInt();
+        System.out.println("Type");
+        book[nxt_book].type=input.next();
+        System.out.println("The Book is Successfully Added!");
     }
 
-    public void remove_book() {
-
+    public void remove_book(Books[]book) {
+              int length=book.length;
+              Scanner input=new Scanner(System.in);
+              String Rmv_book;
+              System.out.println("Please Enter Book's Name");
+              Rmv_book=input.next();
+              for(int i=0;i<length;i++) {
+              if(book[i].Name.equals(Rmv_book) && book[i]!=null) {
+              book[i]=book[length-1];
+              length--;
+              System.out.println("The Book is Successfully Removed!");
+              break;
+              }
+              if(i==length-1) {
+              System.out.println("This Book isn't found");
+              }
+              }
     }
-
    Scanner input2=new Scanner(System.in);
    public void add_user(Readers[]r,int indx){
         System.out.println("PLEASE ENTER THE USER ID: ");

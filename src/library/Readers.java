@@ -46,7 +46,7 @@ public class Readers extends Users {
              if(option1==1)
              {
                 System.out.println("PLEASE ENTER BOOK NAME:");
-                String bookName=input.nextLine();
+                String bookName=input.next();
                 int bookIndex=searchForBook(bookName, userIndex, book);
                 if(bookIndex==-1)
                 {
@@ -59,27 +59,39 @@ public class Readers extends Users {
                 option1=input.nextInt();
                 if(option1==1)
                 {
-                   
-                    Boolean isblocked=Check_isBlocked();
-                    if(isblocked)
+                   Boolean isblocked=reader[userIndex].Check_isBlocked();
+                   Boolean isrented=reader[userIndex].Check_isRentedBefore();
+                    if(isblocked==true)
                     {
                         System.out.println("sorry, you can't rent the book because you are blocked!");
                     }
-     
-                    Boolean isrented=Check_isRentedBefore();
-                    if(isrented)
+                  
+                   else if(isrented==true)
                     {
                         System.out.println("sorry, you can't rent more than one book");
                     }
-                    else
+                    else if(isblocked==false && isrented==false && book[bookIndex].quantity>0)
                     {
                         reader[userIndex].rent(bookName,book,bookIndex);
+                        
                      }
+                 
+                     else
+                     {
+                          System.out.println("the book is not available now! Do you want to be added in the order list?(y/n)");
+                            char choice=input.next().charAt(0);
+                             if(choice=='y')
+                               {
+                              //call add to order list function
+                               }
+                    
+                     }
+                    
                 }
                    
                 else if(option1==2)
                 {
-                    //call return function
+                    //call return_book function
                 }
              }
             }
@@ -115,25 +127,17 @@ public class Readers extends Users {
     {
         
         
-        if(book[bookIndex].quantity>0)
-        {
+        
         isRent=true;
         Book_name=name;
         rentDate=LocalDate.now();
         LocalDate deadline=rentDate.plusDays(7);
         Deadline_Date=deadline;
         book[bookIndex].quantity--;
-        }
-        else
-        {
-            System.out.println("the book is not available now! Do you want to be added in the order list?(y/n)");
-             Scanner input =new Scanner(System.in);
-             char choice=input.next().charAt(0);
-             if(choice=='y')
-             {
-                 //call order list function
-             }
-        }
+        System.out.println("you have successfully rented the book! you must return it before"  +Deadline_Date);
+        
+        
+     
         
        
        }
@@ -159,7 +163,7 @@ public class Readers extends Users {
         }
         
     @Override
-    public void Return()
+    public void Return_book()
     {
         
     }
@@ -198,14 +202,15 @@ public class Readers extends Users {
                 System.out.println("Member's Email: "+reader[i].Email);
                 break;
             }
-            
-            else if(memberID==admin[i].ID)
+            if(i<5){
+            if(memberID==admin[i].ID)
             {
                 memberIndex=i;
                 System.out.println("Member's ID: "+admin[i].ID+"   (Admin)");
                 System.out.println("Member's Name: "+admin[i].firstName+" "+admin[i].lastName);
                 System.out.println("Member's Email: "+admin[i].Email);
                 break;
+            }
             }
         }
         

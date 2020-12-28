@@ -14,7 +14,7 @@ import java.time.*;
  */
 public class Librarians extends Users {
 
-  public Librarians() {
+   public Librarians() {
     }
 
     public Librarians(int ID, String Email, String password, String type, String firstName, String lastName,
@@ -33,9 +33,10 @@ public class Librarians extends Users {
         this.rentDate = rentDate;
         this.Deadline_Date = Deadline_Date;
     }
-int counter=5; //number of readers
-   
-    public void Admin_page(int userIndex, Readers[] reader, Librarians[] admin, Books[] book) {
+    int counter=5; //number of readers
+    
+    public void Admin_page(int userIndex, Readers[] reader, Librarians[] admin, Books[] book)
+    {
         int option1;
         Scanner input = new Scanner(System.in);
         while (true) {
@@ -55,8 +56,7 @@ int counter=5; //number of readers
                 int nxt_book;
                 for(int i=0;i<200;i++) {
                 nxt_book=i;
-                if(book[i]==null) {
-                book[i]=new Books();
+                if(book[i].Name=="empty") {
                 add_book(book,nxt_book);
                  System.out.println(" DO You want to Continue? yes/no ");
                  String ans;
@@ -64,6 +64,7 @@ int counter=5; //number of readers
                     if(ans.equals("no")){
                         break;
                     }
+                    
                 }
                 }
                  
@@ -90,57 +91,77 @@ int counter=5; //number of readers
                      
                      
                  }
-
                  
              }
 
             else if (option1 == 3) 
             {
                 System.out.println("PLEASE ENTER BOOK NAME:");
-                String bookName = input.nextLine();
+                String bookName = input.next();
                 int bookIndex = searchForBook(bookName, userIndex, book);
-
+                  if(bookIndex==-1)
+                {
+                    System.out.println("NO BOOK FOUND");
+                }
+                  else{
                 System.out.println("TO REMOVE THE BOOK PRESS 1");
                 System.out.println("TO RENT THE BOOK PRESS 2");
                 System.out.println("TO RETURN THE BOOK PRESS 3");
                 option1 = input.nextInt();
                 if (option1 == 1)
                 {
-                     //call remove function
+                     //call remove_book function
                     remove_book(book);
                       System.out.println(" DO You want to Continue? yes/no ");
-                 String ans;
+                /*String ans;
                     ans=input.next();
                     if(ans.equals("no")){
                         break;
-                    }
-                } else if (option1 == 2) 
+                    }*////
+                } 
+                else if (option1 == 2) 
                 {
 
-                    Boolean isblocked = Check_isBlocked();
-                    if (isblocked)
+                    Boolean isblocked = admin[userIndex].Check_isBlocked();
+                    Boolean isrented = admin[userIndex].Check_isRentedBefore();
+                    if (isblocked==true)
                     {
                         System.out.println("sorry, you can't rent the book because you are blocked!");
                     }
-
-                    Boolean isrented = Check_isRentedBefore();
-                    if (isrented) 
+                    
+                    
+                    else if (isrented==true) 
                     {
-                        System.out.println("sorry, you can't rent more than one book");
-                    } else 
+                        System.out.println("sorry, you can't rent more than one book!");
+                    } 
+                    
+
+                    
+                    else if(isblocked==false && isrented==false && book[bookIndex].quantity>0)
                     {
                         admin[userIndex].rent(bookName, book, bookIndex);
                     }
-                } 
+                
+                     else
+                     {
+                          System.out.println("the book is not available now! Do you want to be added in the order list?(y/n)");
+                            char choice=input.next().charAt(0);
+                             if(choice=='y')
+                               {
+                              //call add to order list function
+                               }
+                    
+                     }
+                }
                 else if (option1 == 3)
                 {
-                    //call return function
+                    //call return_book function
                 }
-
+                  }
             } 
             else if (option1 == 4)
             {
-                System.out.println("PLEASE ENTER MEMBER'S ID");
+                System.out.println("PLEASE ENTER MEMBER'S ID:");
                 int memberID = input.nextInt();
                 int memberIndex = searchForUser(memberID, reader, admin);
 
@@ -155,36 +176,43 @@ int counter=5; //number of readers
 
                 if (option1 == 1) 
                 {
-                    //call remove function 
+                    //call remove_user function
                     remove_user(reader, memberIndex);
+                    
                 } 
                 
 
             }
             else if (option1 == 5)
             {
-                //call show_order_list function
-                System.out.println("ADD USER TO ORDER LIST PRESS 1");
-                System.out.println("REMOVE USER FROM ORDER LIST PRESS 2");
+                //call show_orderlist function
+                System.out.println("TO ADD USER TO ORDER LIST PRESS 1");
+                System.out.println("TO REMOVE USER FROM ORDER LIST PRESS 2");
                 option1 = input.nextInt();
                 if (option1 == 1)
                 {
                     //call add to order list function  
                 } else if (option1 == 2)
                 {
-                    //call remove function
+                    //call remove from order list function
                 }
             }
             else if (option1 == 6)
             {
-                Show_lateUsers(admin);
+                boolean isFound=Show_lateUsers(admin,reader);
+                if(isFound==true)
+                {
                 System.out.println("TO BLOCK THEM PRESS 1");
                 option1 = input.nextInt();
                 if (option1 == 1) 
                 {
                     Block(admin, reader);
                 }
-
+                }
+                else if(isFound==false)
+                {
+                    System.out.println("The list is empty!");
+                }
             } 
             else if (option1 == 7)
             {
@@ -225,7 +253,7 @@ int counter=5; //number of readers
               }
               }
     }
-   Scanner input2=new Scanner(System.in);
+ Scanner input2=new Scanner(System.in);
    public void add_user(Readers[]r,int indx,Librarians[] admins){
        
         System.out.println("PLEASE ENTER THE USER ID: ");
@@ -317,11 +345,13 @@ int counter=5; //number of readers
         r[indx].Deadline_Date=null;
         counter++;
         }
-    
-   
-   
 
-    public void remove_user(Readers []r,int membindx) {
+               
+           
+        
+    
+
+     public void remove_user(Readers []r,int membindx) {
         for(int i=0;i<counter;i++){
             if(i==membindx){
                 if(membindx==counter-1){
@@ -352,8 +382,9 @@ int counter=5; //number of readers
         }
         counter--;
     }
+     public void show_orderlist() {
 
-
+    }
     public void add_user_orderlist() {
 
     }
@@ -366,22 +397,16 @@ int counter=5; //number of readers
     public void rent(String name, Books[] book, int bookIndex) 
     {
 
-        if (book[bookIndex].quantity > 0) 
-        {
-            isRent = true;
-            Book_name = name;
-            book[bookIndex].quantity--;
-        } 
-        else 
-        {
-            System.out.println("the book is not available now! Do you want to be added in the waiting list?(y/n)");
-            Scanner input = new Scanner(System.in);
-            char choice = input.next().charAt(0);
-            if (choice == 'y')
-            {
-                //call order list function
-            }
-        }
+        
+        isRent=true;
+        Book_name=name;
+        rentDate=LocalDate.now();
+        LocalDate deadline=rentDate.plusDays(7);
+        Deadline_Date=deadline;
+        book[bookIndex].quantity--;
+        System.out.println("you have successfully rented the book! you must return it before"  +Deadline_Date);
+        
+      
     }
 @Override
     public Boolean Check_isBlocked()
@@ -408,21 +433,32 @@ int counter=5; //number of readers
         }
     }
 @Override
-    public void Return() {
+    public void Return_book() {
 
     }
 
-    public void Show_lateUsers(Librarians[] admin)
+    public boolean Show_lateUsers(Librarians[] admin,Readers[] reader)
     {
+        boolean isFound=false;
         LocalDate now = LocalDate.now();
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 100; i++)
         {
+            if(i<5)
+            {
             if (admin[i].Deadline_Date.compareTo(now) < 0)
             {
                 System.out.println(admin[i].Email);
+                isFound=true;
+            }
+            }
+             if (reader[i].Deadline_Date.compareTo(now) < 0)
+            {
+                System.out.println(reader[i].Email);
+                isFound=true;
             }
 
         }
+        return isFound;
     }
 
     public void Block(Librarians admin[], Readers reader[])
@@ -435,11 +471,19 @@ int counter=5; //number of readers
                 if (admin[i].Deadline_Date.compareTo(now) < 0) 
                 {
                     admin[i].isBlocked = true;
+                    admin[i].isRent=false;
+                    admin[i].Book_name="empty";
+                    admin[i].Deadline_Date=LocalDate.of(2030,1,1);
+                    admin[i].rentDate=LocalDate.of(2030,1,1);
                 }
             }
             if (reader[i].Deadline_Date.compareTo(now) < 0)
             {
                 reader[i].isBlocked = true;
+                reader[i].isRent=false;
+                reader[i].Book_name="empty";
+                reader[i].Deadline_Date=LocalDate.of(2030,1,1);
+                reader[i].rentDate=LocalDate.of(2030,1,1);
             }
         }
     }
@@ -484,7 +528,9 @@ int counter=5; //number of readers
                 }
 
                 break;
-            } else if(memberID==admin[i].ID)
+            } 
+            if(i<5){
+            if(memberID==admin[i].ID)
             {
                 memberIndex=i;
                 System.out.println("Member's ID: "+admin[i].ID+"   (Admin)");
@@ -514,7 +560,7 @@ int counter=5; //number of readers
                 break;
             }
         }
-
+        }
         return memberIndex;
     }
 }

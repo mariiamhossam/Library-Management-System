@@ -14,7 +14,7 @@ import java.time.*;
  */
 public class Librarians extends Users {
 
-   public Librarians() {
+  public Librarians() {
     }
 
     public Librarians(int ID, String Email, String password, String type, String firstName, String lastName,
@@ -33,7 +33,8 @@ public class Librarians extends Users {
         this.rentDate = rentDate;
         this.Deadline_Date = Deadline_Date;
     }
-
+int counter=5; //number of readers
+   
     public void Admin_page(int userIndex, Readers[] reader, Librarians[] admin, Books[] book) {
         int option1;
         Scanner input = new Scanner(System.in);
@@ -71,14 +72,14 @@ public class Librarians extends Users {
              {
                 
                  //call add_user function
-                 int addindx;
+                int addindx;
                  String answer;
                  for(int i=0;i<100;i++){
                      addindx=i;
-                    if(reader[i]==null)
+                    if(reader[i].ID==0)
                     {
-                     reader[i]=new Readers();
-                        add_user(reader,addindx);
+                    
+                        add_user(reader,addindx,admin);
                          System.out.println("DO YOU WANT TO CONTINUE: yes/no");
                     answer=input2.next();
                     if(answer.equals("no")){
@@ -89,6 +90,7 @@ public class Librarians extends Users {
                      
                      
                  }
+
                  
              }
 
@@ -154,6 +156,7 @@ public class Librarians extends Users {
                 if (option1 == 1) 
                 {
                     //call remove function 
+                    remove_user(reader, memberIndex);
                 } 
                 
 
@@ -223,24 +226,33 @@ public class Librarians extends Users {
               }
     }
    Scanner input2=new Scanner(System.in);
-   public void add_user(Readers[]r,int indx){
+   public void add_user(Readers[]r,int indx,Librarians[] admins){
+       
         System.out.println("PLEASE ENTER THE USER ID: ");
         r[indx].ID=input2.nextInt();
        
         while(true){
-            int count=0;
+            int countr=0; //count to check there is a readeer id equals to another reader id
+            int countad=0;  //count to check there is an admin id equals to another admin id 
             for(int i=0;i<indx;i++){
                
                 if(r[indx].ID==r[i].ID){
-                    count=1;
+                    countr=1;
                     break;
                 }
             }
-            if(count==1){
+            for(int i=0;i<5;i++){
+            if(r[indx].ID==admins[i].ID){
+                countad=1;
+                break;
+            }
+        }
+            
+            if(countr==1||countad==1){
                 System.out.println("PLEASE ENTER ANOTHER ID AS IT IS ALREADY FOUND: ");
                 r[indx].ID=input2.nextInt();
             }
-            else if(count==0){
+            else if(countr==0&&countad==0){
                 break;
             }
         }
@@ -303,17 +315,44 @@ public class Librarians extends Users {
         r[indx].Book_name=null;
         r[indx].rentDate=null;
         r[indx].Deadline_Date=null;
+        counter++;
         }
     
+   
+   
 
-               
-           
-        
-    
-
-    public void remove_user() {
-
+    public void remove_user(Readers []r,int membindx) {
+        for(int i=0;i<counter;i++){
+            if(i==membindx){
+                if(membindx==counter-1){
+                   r[membindx].ID=0;
+                   r[membindx].Email="empty";
+                   r[membindx].address="empty";
+                   r[membindx].cellPhone="empty";
+                   r[membindx].Book_name="empty";
+                   r[membindx].firstName="empty";
+                   r[membindx].lastName="empty";
+                   r[membindx].password="empty";
+                   r[membindx].isBlocked=false;
+                   r[membindx].isRent=false;
+                   r[membindx].rentDate=LocalDate.of(2030, 1, 1);
+                   r[membindx].Deadline_Date=LocalDate.of(2030, 1, 1);
+                  break; 
+                }
+                else if(membindx<counter-1){
+                    for(int j=membindx;j<counter;j++){
+                   if(j+1<99){     
+                  
+                   r[j]=r[j+1];
+                    }
+                    }
+                    break;
+             }
+            }
+        }
+        counter--;
     }
+
 
     public void add_user_orderlist() {
 

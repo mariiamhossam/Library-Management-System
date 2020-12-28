@@ -33,5 +33,5 @@ public abstract class Users {
     public abstract void rent(String name,Books[]book,int bookIndex);
     public abstract Boolean Check_isBlocked();
     public abstract boolean Check_isRentedBefore();
-    public abstract void Return();
+    public abstract void Return_book();
 }

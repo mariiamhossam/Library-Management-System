@@ -37,7 +37,9 @@ public class LibrarySystem {
                "XXX", "201038365454", false,false,null,null,null);
        
        
-       Readers reader[]=new Readers[100];
+        for(int i=5;i<100;i++){
+           reader[i]=new Readers(0,"empty","empty","empty","empty","empty","empty","empty",false,false,"empty",LocalDate.of(2030 , 1 , 1),LocalDate.of(2030,1,1));
+       }
        
        //initialization of readers
        reader[0]=new Readers(11, "karim11@reader.com", "karim11", "reader", "Karim", "Hossam",

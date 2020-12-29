@@ -37,10 +37,11 @@ public class Librarians extends Users {
     
     public void Admin_page(int userIndex, Readers[] reader, Librarians[] admin, Books[] book)
     {
+        System.out.println("                                  WELCOME TO ADMIN PAGE                               ");
         int option1;
         Scanner input = new Scanner(System.in);
         while (true) {
-            System.out.println("                                  WELCOME TO ADMIN PAGE                               ");
+            
             System.out.println("TO ADD A BOOK PRESS 1 ");
             System.out.println("TO ADD A USER PRESS 2 ");
             System.out.println("TO SEARCH FOR A BOOK PRESS 3 ");
@@ -99,11 +100,14 @@ public class Librarians extends Users {
                 System.out.println("PLEASE ENTER BOOK NAME:");
                 String bookName = input.next();
                 int bookIndex = searchForBook(bookName, userIndex, book);
-                  if(bookIndex==-1)
+               
+                if(bookIndex==-1)
                 {
                     System.out.println("NO BOOK FOUND");
+                    continue;
                 }
-                  else{
+                
+                else{
                 System.out.println("TO REMOVE THE BOOK PRESS 1");
                 System.out.println("TO RENT THE BOOK PRESS 2");
                 System.out.println("TO RETURN THE BOOK PRESS 3");
@@ -167,19 +171,24 @@ public class Librarians extends Users {
 
                 if (memberIndex == -1) 
                 {
-                    System.out.println("NO MEMBER FOUND");
+                    System.out.println("NO MEMBER FOUND!");
+                    continue;
                 }
 
-                System.out.println("TO REMOVE THE USER PRESS 1");
+                System.out.println("DO YOU WANT TO REMOVE THE USER? (y/n)");
                 
-                option1 = input.nextInt();
-
-                if (option1 == 1) 
+                char answer=input.next().charAt(0);
+                if (answer=='y'||answer=='Y') 
                 {
                     //call remove_user function
                     remove_user(reader, memberIndex);
                     
+                    
                 } 
+                else if(answer=='n'||answer=='N')
+                {
+                    continue;
+                }
                 
 
             }
@@ -381,6 +390,7 @@ public class Librarians extends Users {
             }
         }
         counter--;
+        System.out.println("Removal is successfully completed");
     }
      public void show_orderlist() {
 
@@ -529,7 +539,8 @@ public class Librarians extends Users {
 
                 break;
             } 
-            if(i<5){
+            if(i<5)
+            {
             if(memberID==admin[i].ID)
             {
                 memberIndex=i;
@@ -559,6 +570,8 @@ public class Librarians extends Users {
                 
                 break;
             }
+            
+            
         }
         }
         return memberIndex;

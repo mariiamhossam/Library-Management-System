@@ -35,10 +35,11 @@ public class Readers extends Users {
     }
      public void Reader_page(int userIndex,Readers[] reader,Librarians[] admin,Books[]book)
      {
+         System.out.println("                                  WELCOME TO READER PAGE                               ");
          int option1;
           Scanner input =new Scanner(System.in);
           while(true){
-            System.out.println("                                  WELCOME TO READER PAGE                               ");
+            
             System.out.println("TO SEARCH FOR A BOOK PRESS 1");
             System.out.println("TO SEARCH FOR A MEMBER PRESS 2");
             System.out.println("TO LOG OUT PRESS 3");
@@ -50,7 +51,9 @@ public class Readers extends Users {
                 int bookIndex=searchForBook(bookName, userIndex, book);
                 if(bookIndex==-1)
                 {
-                    System.out.println("NO BOOK FOUND");
+                    System.out.println("NO BOOK FOUND!");
+                    System.out.println("_______________________________________");
+                    continue;
                 }
                     
                 else{                
@@ -101,10 +104,13 @@ public class Readers extends Users {
                 System.out.println("PLEASE ENTER MEMBER'S ID:");
                 int memberID=input.nextInt();
                 int memberIndex=searchForUser(memberID,reader,admin);
+                System.out.println("_______________________________________");
                 
                 if(memberIndex==-1)
                 {
-                    System.out.println("NO MEMBER FOUND");
+                    System.out.println("NO MEMBER FOUND!");
+                    System.out.println("_______________________________________");
+                    continue;
                 }
                 
                     
@@ -192,6 +198,7 @@ public class Readers extends Users {
       public int searchForUser(int memberID,Readers[] reader,Librarians[] admin)
     {
         int memberIndex=-1;
+        
         for(int i=0;i<100;i++)
         {
             if(memberID==reader[i].ID)
@@ -202,16 +209,19 @@ public class Readers extends Users {
                 System.out.println("Member's Email: "+reader[i].Email);
                 break;
             }
-            if(i<5){
-            if(memberID==admin[i].ID)
+
+            if(i<5)
             {
+              if(memberID==admin[i].ID)
+              {
                 memberIndex=i;
                 System.out.println("Member's ID: "+admin[i].ID+"   (Admin)");
                 System.out.println("Member's Name: "+admin[i].firstName+" "+admin[i].lastName);
                 System.out.println("Member's Email: "+admin[i].Email);
                 break;
+              }
             }
-            }
+           
         }
         
         return memberIndex;

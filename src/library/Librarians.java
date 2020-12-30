@@ -403,17 +403,78 @@ public class Librarians extends Users {
         
         System.out.println("Removal is successfully completed");
     }
-     public void show_orderlist() {
+   
+   
+        public void show_orderlist(String bookName, int userIndex, Readers[] reader, Librarians[] admin, Books[] book) {
+        int bookIndex = -1;
+        for (int i = 0; i < 200; i++) {
+            if (bookName.equals(book[i].Name)) {
+                bookIndex = i;
+                break;
+            }
+        }
+        
+        if (bookIndex == -1) {
+            System.out.println("BOOK IS NOT FOUND!");
+        }
+        
+        for (int i = 0; i < book[bookIndex].counter; i++)
+        {
+            System.out.println("Info of user no. #" + (i+1) + " in the Order List:");
+            int current = book[bookIndex].orderList[i]; 
+            for (int j = 0; j < 100; j++) 
+            {
+                if (current == reader[j].ID)
+                {
+                    System.out.println("Member's ID: " + reader[j].ID + " (Reader)");
+                    System.out.println("Member's Name: " + reader[j].firstName + " " + reader[j].lastName);
+                    System.out.println("Member's Email: " + reader[j].Email);
+                    break;
+                }
 
+                if (j < 5) 
+                {
+                    if (current == admin[j].ID) {
+                        System.out.println("Member's ID: " + admin[j].ID + " (Admin)");
+                        System.out.println("Member's Name: " + admin[j].firstName + " " + admin[j].lastName);
+                        System.out.println("Member's Email: " + admin[j].Email);
+                        break;
+                    }
+                }
+
+            }
+            
+        }
     }
-    public void add_user_orderlist() {
 
+    public void add_user_orderlist(String bookName, int User_ID, Books[] book) {
+        for (int i = 0; i < 200; i++) {
+            if (bookName.equals(book[i].Name)) {
+                book[i].orderList[book[i].counter] = User_ID;
+                book[i].counter++;
+                break;
+            }
+        }
     }
 
-    public void remove_user_orderlist() {
-
+    public void remove_user_orderlist(String bookName, int User_ID, Books[] book) {
+        int bookIndex = -1;
+        for (int i = 0; i < 200; i++) {
+            if (bookName.equals(book[i].Name)) {
+                bookIndex = i;
+                for (int j = 1; j < 200; j++) {
+                    book[i].orderList[j - 1] = book[i].orderList[j];
+                }
+                book[i].counter--;
+                break;
+            }
+        }
+        if (bookIndex == -1) {
+            System.out.println("Book is not found in the system.");
+        }
     }
 
+   
     @Override
     public void rent(String name, Books[] book, int bookIndex) 
     {

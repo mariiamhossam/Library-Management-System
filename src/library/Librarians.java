@@ -158,6 +158,8 @@ public class Librarians extends Users {
                         if(choice=='y')
                         {
                             //call add to order list function
+                           int userID = admin[userIndex].ID;
+                           add_user_orderlist(bookName, userID, book);
                         }
                     
                       }

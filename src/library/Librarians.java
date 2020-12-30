@@ -104,65 +104,75 @@ public class Librarians extends Users {
                 if(bookIndex==-1)
                 {
                     System.out.println("NO BOOK FOUND");
+                    System.out.println("_______________________________________");
                     continue;
                 }
                 
-                else{
-                System.out.println("TO REMOVE THE BOOK PRESS 1");
-                System.out.println("TO RENT THE BOOK PRESS 2");
-                System.out.println("TO RETURN THE BOOK PRESS 3");
-                option1 = input.nextInt();
-                if (option1 == 1)
+                 else
                 {
-                     //call remove_book function
-                    remove_book(book);
+                  System.out.println("Do you want to Remove, Rent or Return this book? (y/n)"); 
+                  char choice=input.next().charAt(0);
+                  if(choice=='y'||choice=='Y')
+                  {
+                    System.out.println("TO REMOVE THE BOOK PRESS 1");
+                    System.out.println("TO RENT THE BOOK PRESS 2");
+                    System.out.println("TO RETURN THE BOOK PRESS 3");
+                    option1 = input.nextInt();
+                    if (option1 == 1)
+                    {
+                      //call remove_book function
+                      remove_book(book);
                       System.out.println(" DO You want to Continue? yes/no ");
-                /*String ans;
-                    ans=input.next();
-                    if(ans.equals("no")){
-                        break;
-                    }*////
-                } 
-                else if (option1 == 2) 
-                {
-
-                    Boolean isblocked = admin[userIndex].Check_isBlocked();
-                    Boolean isrented = admin[userIndex].Check_isRentedBefore();
-                    if (isblocked==true)
-                    {
-                        System.out.println("sorry, you can't rent the book because you are blocked!");
-                    }
-                    
-                    
-                    else if (isrented==true) 
-                    {
-                        System.out.println("sorry, you can't rent more than one book!");
+                      /*String ans;
+                      ans=input.next();
+                      if(ans.equals("no")){
+                      break;
+                     *////
                     } 
+                    else if (option1 == 2) 
+                    {
+
+                      Boolean isblocked = admin[userIndex].Check_isBlocked();
+                      Boolean isrented = admin[userIndex].Check_isRentedBefore();
+                      if (isblocked==true)
+                      {
+                        System.out.println("sorry, you can't rent the book because you are blocked!");
+                      }
+                    
+                    
+                      else if (isrented==true) 
+                      {
+                        System.out.println("sorry, you can't rent more than one book!");
+                      } 
                     
 
-                    
-                    else if(isblocked==false && isrented==false && book[bookIndex].quantity>0)
-                    {
+                      else if(isblocked==false && isrented==false && book[bookIndex].quantity>0)
+                      {
                         admin[userIndex].rent(bookName, book, bookIndex);
-                    }
+                      }
                 
-                     else
-                     {
-                          System.out.println("the book is not available now! Do you want to be added in the order list?(y/n)");
-                            char choice=input.next().charAt(0);
-                             if(choice=='y')
-                               {
-                              //call add to order list function
-                               }
+                      else
+                      {
+                        System.out.println("the book is not available now! Do you want to be added in the order list?(y/n)");
+                        choice=input.next().charAt(0);
+                        if(choice=='y')
+                        {
+                            //call add to order list function
+                        }
                     
-                     }
-                }
-                else if (option1 == 3)
-                {
-                    //call return_book function
-                   Return_book(book,bookIndex,reader,userIndex);
-                }
+                      }
+                    }
+                   else if (option1 == 3)
+                   {
+                     //call return_book function
+                   }
                   }
+                  else if(choice=='n'||choice=='N')
+                  {
+                      System.out.println("_______________________________________");
+                      continue;
+                  }
+                }
             } 
             else if (option1 == 4)
             {

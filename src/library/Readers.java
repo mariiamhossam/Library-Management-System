@@ -44,8 +44,7 @@ public class Readers extends Users {
             
             System.out.println("TO SEARCH FOR A BOOK PRESS 1");
             System.out.println("TO SEARCH FOR A MEMBER PRESS 2");
-            System.out.println("TO ADD A MEMBER FOR A SYSTEM PRESS 3");
-            System.out.println("TO LOG OUT PRESS 4");
+            System.out.println("TO LOG OUT PRESS 3");
              option1=input.nextInt();
              if(option1==1)
              {
@@ -119,30 +118,17 @@ public class Readers extends Users {
                 
                     
             }
-            else if(option1==3){
-                //call add_reader function
-                int indx_reader=0; //indx of the empty user
-                
-         for(int i=0;i<100;i++){
-             if(reader[i].ID==0){
-                 indx_reader=i;
-                 break;
-             }
-         }
-                 add_reader(reader, indx_reader, admin);
-            }
             
-             else if(option1==4)
+            
+             else if(option1==3)
             {
                 break;
             }    
         }
      }
-     public void add_reader(Readers[]r,int indx, Librarians [] admins)
+     public void add_self()
      {
-         Librarians admin1=new Librarians();
-         
-         admin1.add_user(r , indx, admins);
+        
      }
      
     

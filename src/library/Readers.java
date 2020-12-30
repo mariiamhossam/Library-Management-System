@@ -37,7 +37,7 @@ public class Readers extends Users {
     
      public void Reader_page(int userIndex,Readers[] reader,Librarians[] admin,Books[]book)
      {
-         System.out.println("                                  WELCOME TO READER PAGE                               ");
+         System.out.println("                                 * WELCOME TO READER PAGE *                              ");
          int option1;
           Scanner input =new Scanner(System.in);
           while(true){

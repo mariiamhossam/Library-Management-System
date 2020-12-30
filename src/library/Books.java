@@ -20,7 +20,7 @@ public class Books {
         
     }
     
-    public Books(String Name,int quantity,String type,String orderlist[])
+    public Books(String Name,int quantity,String type,int orderlist[])
     {
         this.Name=Name;
         this.quantity=quantity;

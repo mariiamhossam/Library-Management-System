@@ -160,7 +160,7 @@ public class Librarians extends Users {
                 else if (option1 == 3)
                 {
                     //call return_book function
-                    Return_book(book);
+                   Return_book(book,bookIndex,reader,userIndex);
                 }
                   }
             } 
@@ -444,31 +444,15 @@ public class Librarians extends Users {
         }
     }
    @Override
-   public void Return_book(Books[] b)
+    
+    public void Return_book(Books[] b,int book_indx,Readers[]r,int user_indx)
     {
-        String book_name;
-        int isfound=0;
-        System.out.println("PLEASE ENTER THE NAME OF THE BOOK: ");
-        book_name=input2.next();
-        while(true){
-            for(int i=0;i<200;i++){
-            if(book_name.equals(b[i].Name)){
-                b[i].quantity++;
-                isfound=1;
-                break;
-               
-            }
-            }
-            if(isfound==0){
-                System.out.println("THIS BOOK IS NOT FOUND PLEASE ENTER ANOTHER BOOK NAME: ");
-            }
-            else if(isfound==1){
-                break;
-            }
-        }
+        b[book_indx].quantity++;
+        r[user_indx].isRent=false;
+        r[user_indx].rentDate=LocalDate.of(2030,1,2);
+        r[user_indx].Deadline_Date=LocalDate.of(2030,1,2);
         
-        }
-        
+    }
        
         
     

@@ -134,9 +134,9 @@ public class Readers extends Users {
             }    
         }
      }
-     public void add_self_toorderlist()
+     public void add_self_toorderlist(String bookName, int userID, Books[] book)
      {
-        
+        Librarians.add_user_orderlist(bookName,userID,book);
      }
      
     

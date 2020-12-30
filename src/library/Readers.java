@@ -92,6 +92,8 @@ public class Readers extends Users {
                         if(choice=='y')
                         {
                             //call add to order list function
+                            int userID = reader[userIndex].ID;
+                            add_self_toorderlist(bookName, userID, book);
                         }
                     
                      }
@@ -134,10 +136,16 @@ public class Readers extends Users {
             }    
         }
      }
-     public void add_self_toorderlist()
-     {
-
-     }
+    
+    public void add_self_toorderlist(String bookName, int User_ID, Books[] book) {
+        for (int i = 0; i < 200; i++) {
+            if (bookName.equals(book[i].Name)) {
+                book[i].orderList[book[i].counter] = User_ID;
+                book[i].counter++;
+                break;
+            }
+        }
+    }
      
     
      @Override

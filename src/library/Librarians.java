@@ -425,7 +425,7 @@ public class Librarians extends Users {
         LocalDate deadline=rentDate.plusDays(7);
         Deadline_Date=deadline;
         book[bookIndex].quantity--;
-        System.out.println("you have successfully rented the book! you must return it before"  +Deadline_Date);
+        System.out.println("you have successfully rented the book! you must return it before "  +Deadline_Date);
         
       
     }

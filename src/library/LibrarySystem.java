@@ -90,7 +90,7 @@ public class LibrarySystem {
         {
            String Email,password;
            Scanner input =new Scanner(System.in);
-           System.out.println("                                     * WELCOME TO LIBRARY SYSTEM*                ");
+           System.out.println("                                     * WELCOME TO LIBRARY SYSTEM *                ");
            System.out.println("Please enter your Email and password to log in");
            System.out.print("Email: ");
            Email=input.next();

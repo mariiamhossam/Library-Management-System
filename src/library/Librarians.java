@@ -206,15 +206,21 @@ public class Librarians extends Users {
             else if (option1 == 5)
             {
                 //call show_orderlist function
+                System.out.println("PLEASE ENTER BOOK NAME TO SHOW ITS ORDER LIST:");
+                String bookName = input.next();
+                show_orderlist(bookName, reader, admin, book);
+
                 System.out.println("TO ADD USER TO ORDER LIST PRESS 1");
                 System.out.println("TO REMOVE USER FROM ORDER LIST PRESS 2");
                 option1 = input.nextInt();
-                if (option1 == 1)
-                {
-                    //call add to order list function  
-                } else if (option1 == 2)
-                {
+                int userID = admin[userIndex].ID;
+                
+                if (option1 == 1) {
+                    //call add to order list function
+                    add_user_orderlist(bookName, userID, book);
+                } else if (option1 == 2) {
                     //call remove from order list function
+                    remove_user_orderlist(bookName, userID, book);
                 }
             }
             else if (option1 == 6)

@@ -13,7 +13,9 @@ public class Books {
      public String Name;
     public int quantity;
     public String type;
-    public String orderList[]=new String[quantity];
+    public int orderList[] = new int[200];
+    public int counter = 0;  //Counter for number of users in orderList 
+
     public Books(){
         
     }

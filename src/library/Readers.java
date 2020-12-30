@@ -58,48 +58,56 @@ public class Readers extends Users {
                     continue;
                 }
                     
-                else{                
-                System.out.println("TO RENT THE BOOK PRESS 1");
-                System.out.println("TO RETURN THE BOOK PRESS 2");
-                option1=input.nextInt();
-                if(option1==1)
+                 else
+                {  
+                System.out.println("Do you want to rent or return this book? (y/n)");
+                char choice=input.next().charAt(0);
+                if(choice=='y'||choice=='Y')
                 {
-                   Boolean isblocked=reader[userIndex].Check_isBlocked();
-                   Boolean isrented=reader[userIndex].Check_isRentedBefore();
-                    if(isblocked==true)
-                    {
+                   System.out.println("TO RENT THE BOOK PRESS 1");
+                   System.out.println("TO RETURN THE BOOK PRESS 2");
+                   option1=input.nextInt();
+                   if(option1==1)
+                   {
+                     Boolean isblocked=reader[userIndex].Check_isBlocked();
+                     Boolean isrented=reader[userIndex].Check_isRentedBefore();
+                     if(isblocked==true)
+                     {
                         System.out.println("sorry, you can't rent the book because you are blocked!");
-                    }
+                     }
                   
-                   else if(isrented==true)
-                    {
+                     else if(isrented==true)
+                     {
                         System.out.println("sorry, you can't rent more than one book");
-                    }
-                    else if(isblocked==false && isrented==false && book[bookIndex].quantity>0)
-                    {
-                        reader[userIndex].rent(bookName,book,bookIndex);
-                        
+                     }
+                     else if(isblocked==false && isrented==false && book[bookIndex].quantity>0)
+                     {
+                         reader[userIndex].rent(bookName,book,bookIndex);                      
                      }
                  
                      else
                      {
-                          System.out.println("the book is not available now! Do you want to be added in the order list?(y/n)");
-                            char choice=input.next().charAt(0);
-                             if(choice=='y')
-                               {
-                              //call add to order list function
-                               }
+                        System.out.println("the book is not available now! Do you want to be added in the order list?(y/n)");
+                        choice=input.next().charAt(0);
+                        if(choice=='y')
+                        {
+                            //call add to order list function
+                        }
                     
                      }
-                    
-                }
+                   }
                    
-                else if(option1==2)
-                {
-                    //call return_book function
-                    Return_book(book,bookIndex,reader,userIndex);
+                    else if(option1==2)
+                    {
+                      //call return_book function
+                    }  
                 }
-             }
+                else if(choice=='n'||choice=='N')
+                {
+                   System.out.println("______________________________");
+                   continue;
+                }
+                }
             }
           
             else if(option1==2)

@@ -37,7 +37,7 @@ public class Librarians extends Users {
     
     public void Admin_page(int userIndex, Readers[] reader, Librarians[] admin, Books[] book)
     {
-        System.out.println("                                  WELCOME TO ADMIN PAGE                               ");
+        System.out.println("                                 * WELCOME TO ADMIN PAGE *                              ");
         int option1;
         Scanner input = new Scanner(System.in);
         while (true) {

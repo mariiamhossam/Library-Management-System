@@ -97,7 +97,7 @@ public class Readers extends Users {
                 else if(option1==2)
                 {
                     //call return_book function
-                    Return_book(book);
+                    Return_book(book,bookIndex,reader,userIndex);
                 }
              }
             }
@@ -126,7 +126,7 @@ public class Readers extends Users {
             }    
         }
      }
-     public void add_self()
+     public void add_self_toorderlist()
      {
         
      }
@@ -171,35 +171,16 @@ public class Readers extends Users {
             else
             return false;
         }
-        Scanner in =new Scanner(System.in);
+        
        
     @Override
     
-    public void Return_book(Books[] b)
+    public void Return_book(Books[] b,int book_indx,Readers[]r,int user_indx)
     {
-        String book_name;
-        int isfound=0;
-        System.out.println("PLEASE ENTER THE NAME OF THE BOOK: ");
-        book_name=in.next();
-        while(true){
-            for(int i=0;i<200;i++){
-            if(b[i].Name.equals(book_name)){
-                b[i].quantity++;
-                isfound=1;
-                break;
-               
-            }
-            }
-            if(isfound==0){
-                System.out.println("THIS BOOK IS NOT FOUND PLEASE ENTER ANOTHER BOOK NAME: ");
-            }
-            else if(isfound==1){
-                break;
-            }
-        }
-        
-        
-       
+        b[book_indx].quantity++;
+        r[user_indx].isRent=false;
+        r[user_indx].rentDate=LocalDate.of(2030,1,2);
+        r[user_indx].Deadline_Date=LocalDate.of(2030,1,2);
         
     }
    

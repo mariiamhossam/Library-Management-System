@@ -33,7 +33,7 @@ public class Librarians extends Users {
         this.rentDate = rentDate;
         this.Deadline_Date = Deadline_Date;
     }
-    int counter=5; //number of readers
+   
     
     public void Admin_page(int userIndex, Readers[] reader, Librarians[] admin, Books[] book)
     {
@@ -160,6 +160,7 @@ public class Librarians extends Users {
                 else if (option1 == 3)
                 {
                     //call return_book function
+                    Return_book(book);
                 }
                   }
             } 
@@ -352,7 +353,7 @@ public class Librarians extends Users {
         r[indx].Book_name=null;
         r[indx].rentDate=null;
         r[indx].Deadline_Date=null;
-        counter++;
+        
         }
 
                
@@ -361,9 +362,9 @@ public class Librarians extends Users {
     
 
      public void remove_user(Readers []r,int membindx) {
-        for(int i=0;i<counter;i++){
+        for(int i=0;i<100;i++){
             if(i==membindx){
-                if(membindx==counter-1){
+                if(membindx==99){
                    r[membindx].ID=0;
                    r[membindx].Email="empty";
                    r[membindx].address="empty";
@@ -378,8 +379,8 @@ public class Librarians extends Users {
                    r[membindx].Deadline_Date=LocalDate.of(2030, 1, 1);
                   break; 
                 }
-                else if(membindx<counter-1){
-                    for(int j=membindx;j<counter;j++){
+                else if(membindx<99){
+                    for(int j=membindx;j<100;j++){
                    if(j+1<99){     
                   
                    r[j]=r[j+1];
@@ -389,7 +390,7 @@ public class Librarians extends Users {
              }
             }
         }
-        counter--;
+        
         System.out.println("Removal is successfully completed");
     }
      public void show_orderlist() {
@@ -442,10 +443,35 @@ public class Librarians extends Users {
             return false;
         }
     }
-@Override
-    public void Return_book() {
-
-    }
+   @Override
+   public void Return_book(Books[] b)
+    {
+        String book_name;
+        int isfound=0;
+        System.out.println("PLEASE ENTER THE NAME OF THE BOOK: ");
+        book_name=input2.next();
+        while(true){
+            for(int i=0;i<200;i++){
+            if(book_name.equals(b[i].Name)){
+                b[i].quantity++;
+                isfound=1;
+                break;
+               
+            }
+            }
+            if(isfound==0){
+                System.out.println("THIS BOOK IS NOT FOUND PLEASE ENTER ANOTHER BOOK NAME: ");
+            }
+            else if(isfound==1){
+                break;
+            }
+        }
+        
+        }
+        
+       
+        
+    
 
     public boolean Show_lateUsers(Librarians[] admin,Readers[] reader)
     {

@@ -16,6 +16,7 @@ public class Readers extends Users {
     {
         
     }
+    
      public Readers(int ID,String Email,String password,String type,String firstName,String lastName,
              String address,String cellPhone,boolean isBlocked,boolean isRent,String Book_name,LocalDate rentDate,LocalDate Deadline_Date)
     {
@@ -33,6 +34,7 @@ public class Readers extends Users {
        this.rentDate=rentDate;
        this.Deadline_Date=Deadline_Date;
     }
+    
      public void Reader_page(int userIndex,Readers[] reader,Librarians[] admin,Books[]book)
      {
          System.out.println("                                  WELCOME TO READER PAGE                               ");
@@ -42,7 +44,8 @@ public class Readers extends Users {
             
             System.out.println("TO SEARCH FOR A BOOK PRESS 1");
             System.out.println("TO SEARCH FOR A MEMBER PRESS 2");
-            System.out.println("TO LOG OUT PRESS 3");
+            System.out.println("TO ADD A MEMBER FOR A SYSTEM PRESS 3");
+            System.out.println("TO LOG OUT PRESS 4");
              option1=input.nextInt();
              if(option1==1)
              {
@@ -95,6 +98,7 @@ public class Readers extends Users {
                 else if(option1==2)
                 {
                     //call return_book function
+                    Return_book(book);
                 }
              }
             }
@@ -115,16 +119,30 @@ public class Readers extends Users {
                 
                     
             }
+            else if(option1==3){
+                //call add_reader function
+                int indx_reader=0; //indx of the empty user
+                
+         for(int i=0;i<100;i++){
+             if(reader[i].ID==0){
+                 indx_reader=i;
+                 break;
+             }
+         }
+                 add_reader(reader, indx_reader, admin);
+            }
             
-             else if(option1==3)
+             else if(option1==4)
             {
                 break;
             }    
         }
      }
-     public void add_self()
+     public void add_reader(Readers[]r,int indx, Librarians [] admins)
      {
+         Librarians admin1=new Librarians();
          
+         admin1.add_user(r , indx, admins);
      }
      
     
@@ -167,10 +185,35 @@ public class Readers extends Users {
             else
             return false;
         }
-        
+        Scanner in =new Scanner(System.in);
+       
     @Override
-    public void Return_book()
+    
+    public void Return_book(Books[] b)
     {
+        String book_name;
+        int isfound=0;
+        System.out.println("PLEASE ENTER THE NAME OF THE BOOK: ");
+        book_name=in.next();
+        while(true){
+            for(int i=0;i<200;i++){
+            if(b[i].Name.equals(book_name)){
+                b[i].quantity++;
+                isfound=1;
+                break;
+               
+            }
+            }
+            if(isfound==0){
+                System.out.println("THIS BOOK IS NOT FOUND PLEASE ENTER ANOTHER BOOK NAME: ");
+            }
+            else if(isfound==1){
+                break;
+            }
+        }
+        
+        
+       
         
     }
    

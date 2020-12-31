@@ -209,7 +209,7 @@ public class Readers extends Users {
             if(bookName.equals(book[i].Name))
             {
                 bookIndex=i;
-                System.out.println("Book Name: "+book[bookIndex].Name+"\t"+book[bookIndex].type);
+                System.out.println("Book Name: "+book[bookIndex].Name+"\t"+"Quantity: "+book[bookIndex].type);
                 System.out.println("                              -------------------------------                              ");
                 break;
             }

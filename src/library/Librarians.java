@@ -410,6 +410,7 @@ public class Librarians extends Users {
         }
         
         System.out.println("Removal is successfully completed");
+        System.out.println("_______________________________________");
     }
    
    
@@ -594,7 +595,7 @@ public class Librarians extends Users {
             if (bookName.equals(book[i].Name)) {
                 bookIndex = i;
                 System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t" + "Quantity: " + book[bookIndex].quantity);
-                System.out.println("                              -------------------------------                              ");
+                System.out.println("_______________________________________");
                 break;
             }
         }

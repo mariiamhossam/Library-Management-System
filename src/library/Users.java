@@ -4,15 +4,18 @@
  * and open the template in the editor.
  */
 package Library;
+
 import java.time.*;
 //import java.text.SimpleDateFormat;  
 //import java.text.ParseException; 
+
 /**
  *
  * @author yosef
  */
 public abstract class Users {
-      public int ID;
+
+    public int ID;
     public String Email;
     public String password;
     public String type;
@@ -25,13 +28,16 @@ public abstract class Users {
     public String Book_name;
     public LocalDate rentDate;
     public LocalDate Deadline_Date;
-    
-    
-    
-    public abstract int searchForBook(String bookName,int index,Books[]book);
-    public abstract int searchForUser(int memberID,Readers[] reader,Librarians[] admin);
-    public abstract void rent(String name,Books[]book,int bookIndex);
+
+    public abstract int searchForBook(String bookName, int index, Books[] book);
+
+    public abstract int searchForUser(int memberID, Readers[] reader, Librarians[] admin);
+
+    public abstract void rent(String name, Books[] book, int bookIndex);
+
     public abstract Boolean Check_isBlocked();
+
     public abstract boolean Check_isRentedBefore();
-    public abstract void Return_book(Books b[],int book_indx,Readers[] r,int user_indx);
+
+    public abstract void Return_book(Books b[], int book_indx, Readers[] r, int user_indx);
 }

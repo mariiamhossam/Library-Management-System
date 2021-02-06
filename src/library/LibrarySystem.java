@@ -57,11 +57,11 @@ public class LibrarySystem {
 
         Books book[] = new Books[200];
         //initialization of books
-        book[0] = new Books("x", 0, "x", new int[]{});
-        book[1] = new Books("y", 1, "x", new int[]{});
-        book[2] = new Books("z", 1, "x", new int[]{});
-        book[3] = new Books("a", 1, "x", new int[]{});
-        book[4] = new Books("b", 1, "x", new int[]{});
+        book[0] = new Books("x", 0, "x");
+        book[1] = new Books("y", 1, "x");
+        book[2] = new Books("z", 1, "x");
+        book[3] = new Books("a", 1, "x");
+        book[4] = new Books("b", 1, "x");
 
         //initialization of readers by default values
         for (int i = 5; i < 100; i++) {
@@ -71,7 +71,7 @@ public class LibrarySystem {
         }
         //intialization of books by default values
         for (int i = 5; i < 200; i++) {
-            book[i] = new Books("empty", 0, "empty", new int[]{});
+            book[i] = new Books("empty", 0, "empty");
 
         }
 

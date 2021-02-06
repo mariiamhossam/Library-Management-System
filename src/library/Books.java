@@ -21,10 +21,9 @@ public class Books {
 
     }
 
-    public Books(String Name, int quantity, String type, int orderlist[]) {
+    public Books(String Name, int quantity, String type) {
         this.Name = Name;
         this.quantity = quantity;
         this.type = type;
-        this.orderList = orderlist;
     }
 }

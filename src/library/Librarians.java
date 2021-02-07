@@ -407,6 +407,8 @@ public class Librarians extends Users {
     public void add_user_orderlist(int User_ID, Books[] book, int bookIndex) {
         book[bookIndex].orderList[book[bookIndex].counter] = User_ID;
         book[bookIndex].counter++;
+        System.out.println("You have been successfully added to the order list");
+        System.out.println("_______________________________________");
     }
 
     public void remove_user_orderlist(int User_ID, Books[] book, int bookIndex) {

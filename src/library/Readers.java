@@ -115,6 +115,7 @@ public class Readers extends Users {
     public void add_self_toorderlist(int User_ID, Books[] book, int bookIndex) {
         book[bookIndex].orderList[book[bookIndex].counter] = User_ID;
         book[bookIndex].counter++;
+        System.out.println("You have been successfully added to the order list");
     }
 
     @Override

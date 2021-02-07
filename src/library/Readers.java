@@ -49,6 +49,9 @@ public class Readers extends Users {
                 System.out.println("PLEASE ENTER BOOK NAME:");
                 String bookName = input.next();
                 int bookIndex = searchForBook(bookName, userIndex, book);
+                System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t" + "Quantity: " + book[bookIndex].quantity);
+                System.out.println("_______________________________________");
+                
                 if (bookIndex == -1) {
                     System.out.println("NO BOOK FOUND!");
                     System.out.println("_______________________________________");
@@ -74,20 +77,17 @@ public class Readers extends Users {
                                 choice = input.next().charAt(0);
                                 if (choice == 'y') {
                                     //call add to order list function
-                                    int bookID = -1;
-                                    for (int i = 0; i < 200; i++) {
-                                        if (bookName.equals(book[i].Name)) {
-                                            bookID = i;
-                                            break;
-                                        }
-                                    }
+
+                                    bookIndex = searchForBook(bookName, userIndex, book);
                                     int userID = reader[userIndex].ID;
-                                    add_self_toorderlist(userID, book, bookID);
+                                    add_self_toorderlist(userID, book, bookIndex);
                                 }
 
                             }
                         } else if (option1 == 2) {
                             //call return_book function
+                            Return_book(book, bookIndex, reader, userIndex);
+                            
                         }
                     } else if (choice == 'n' || choice == 'N') {
                         System.out.println("______________________________");
@@ -119,18 +119,7 @@ public class Readers extends Users {
         System.out.println("_______________________________________");
     }
 
-    @Override
-    public void rent(String name, Books[] book, int bookIndex) {
 
-        isRent = true;
-        Book_name = name;
-        rentDate = LocalDate.now();
-        LocalDate deadline = rentDate.plusDays(7);
-        Deadline_Date = deadline;
-        book[bookIndex].quantity--;
-        System.out.println("you have successfully rented the book! you must return it before " + Deadline_Date);
-
-    }
 
     @Override
     public Boolean Check_isBlocked() {
@@ -151,30 +140,7 @@ public class Readers extends Users {
         }
     }
 
-    @Override
 
-    public void Return_book(Books[] b, int book_indx, Readers[] r, int user_indx) {
-        b[book_indx].quantity++;
-        r[user_indx].isRent = false;
-        r[user_indx].rentDate = LocalDate.of(2030, 1, 2);
-        r[user_indx].Deadline_Date = LocalDate.of(2030, 1, 2);
-
-    }
-
-    @Override
-    public int searchForBook(String bookName, int index, Books[] book) {
-        int bookIndex = -1;
-        for (int i = 0; i < 200; i++) {
-            if (bookName.equals(book[i].Name)) {
-                bookIndex = i;
-                System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Quantity: " + book[bookIndex].type);
-                System.out.println("                              -------------------------------                              ");
-                break;
-            }
-        }
-
-        return bookIndex;
-    }
 
     @Override
     public int searchForUser(int memberID, Readers[] reader, Librarians[] admin) {

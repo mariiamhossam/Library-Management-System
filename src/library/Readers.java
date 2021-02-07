@@ -49,7 +49,7 @@ public class Readers extends Users {
                 System.out.println("PLEASE ENTER BOOK NAME:");
                 String bookName = input.next();
                 int bookIndex = searchForBook(bookName, userIndex, book);
-                System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t" + "Quantity: " + book[bookIndex].quantity);
+                System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t\t" + "Quantity: " + book[bookIndex].quantity);
                 System.out.println("_______________________________________");
                 
                 if (bookIndex == -1) {

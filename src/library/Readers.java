@@ -116,6 +116,7 @@ public class Readers extends Users {
         book[bookIndex].orderList[book[bookIndex].counter] = User_ID;
         book[bookIndex].counter++;
         System.out.println("You have been successfully added to the order list");
+        System.out.println("_______________________________________");
     }
 
     @Override

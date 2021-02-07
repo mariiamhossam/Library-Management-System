@@ -213,6 +213,7 @@ public class Librarians extends Users {
                     if (option1 == 1) {
                         Block(admin, reader);
                         System.out.println("Blocking process is successfully done");
+                        System.out.println("_______________________________________");
                     }
                 } else if (isFound == false) {
                     System.out.println("THE LIST IS EMPTY!");

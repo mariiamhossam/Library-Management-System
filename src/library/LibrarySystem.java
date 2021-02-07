@@ -106,7 +106,7 @@ public class LibrarySystem {
 
                         userIndex = i;
                         r.Reader_page(userIndex, reader, admin, book);
-
+                        isFound=true;
                         break;
                     }
 

@@ -387,6 +387,7 @@ public class Librarians extends Users {
                     System.out.println("Member's ID: " + reader[j].ID + " (Reader)");
                     System.out.println("Member's Name: " + reader[j].firstName + " " + reader[j].lastName);
                     System.out.println("Member's Email: " + reader[j].Email);
+                    System.out.println("--------------------------------");
                     break;
                 }
 

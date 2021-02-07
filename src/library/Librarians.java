@@ -212,6 +212,7 @@ public class Librarians extends Users {
                     option1 = input.nextInt();
                     if (option1 == 1) {
                         Block(admin, reader);
+                        System.out.println("Blocking process is successfully done");
                     }
                 } else if (isFound == false) {
                     System.out.println("THE LIST IS EMPTY!");

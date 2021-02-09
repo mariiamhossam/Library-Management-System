@@ -28,6 +28,8 @@ public abstract class Users {
     public String Book_name;
     public LocalDate rentDate;
     public LocalDate Deadline_Date;
+    
+     public abstract void menu();
 
     public int searchForBook(String bookName, int index, Books[] book)
     {
@@ -41,7 +43,24 @@ public abstract class Users {
         return bookIndex;
     }
 
-    public abstract int searchForUser(int memberID, Readers[] reader, Librarians[] admin);
+    public int searchForUser(int memberID, Readers[] reader, Librarians[] admin,int memberIndex)
+    {
+        
+        for (int i = 0; i < 100; i++) {
+            if (memberID == reader[i].ID) {
+                memberIndex = i;
+                break;
+            }
+            if (i < 5) {
+                if (memberID == admin[i].ID) {
+                    memberIndex = i;
+                    break;
+                }
+
+            }
+        }
+        return memberIndex;
+    }
 
     public void rent(String name, Books[] book, int bookIndex)
     {
@@ -55,9 +74,23 @@ public abstract class Users {
         System.out.println("_______________________________________");
     }
 
-    public abstract Boolean Check_isBlocked();
+   public Boolean Check_isBlocked()
+    {
+        if (isBlocked == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    public abstract boolean Check_isRentedBefore();
+    public  boolean Check_isRentedBefore()
+    {
+        if (isRent == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public void Return_book(Books b[], int book_indx, Readers[] r, int user_indx)
     {

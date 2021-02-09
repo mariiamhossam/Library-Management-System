@@ -40,13 +40,7 @@ public class Librarians extends Users {
         Scanner input = new Scanner(System.in);
         while (true) {
 
-            System.out.println("TO ADD A BOOK PRESS 1 ");
-            System.out.println("TO ADD A USER PRESS 2 ");
-            System.out.println("TO SEARCH FOR A BOOK PRESS 3 ");
-            System.out.println("TO SEARCH FOR A MEMBER PRESS 4 ");
-            System.out.println("TO SHOW ORDER LIST PRESS 5");
-            System.out.println("TO SHOW LATE USERS PRESS 6");
-            System.out.println("TO LOG OUT PRESS 7");
+             displayMenu();
             option1 = input.nextInt();
             if (option1 == 1) {
 
@@ -223,6 +217,17 @@ public class Librarians extends Users {
             }
 
         }
+    }
+    
+    public void displayMenu()
+    {
+        System.out.println("TO ADD A BOOK PRESS 1 ");
+            System.out.println("TO ADD A USER PRESS 2 ");
+            System.out.println("TO SEARCH FOR A BOOK PRESS 3 ");
+            System.out.println("TO SEARCH FOR A MEMBER PRESS 4 ");
+            System.out.println("TO SHOW ORDER LIST PRESS 5");
+            System.out.println("TO SHOW LATE USERS PRESS 6");
+            System.out.println("TO LOG OUT PRESS 7");
     }
 
     public void add_book(Books[] book, int nxt_book) {
@@ -434,27 +439,6 @@ public class Librarians extends Users {
             book[bookIndex].orderList[i - 1] = book[bookIndex].orderList[i];
         }
         book[bookIndex].counter--;
-    }
-
-
-
-    @Override
-    public Boolean Check_isBlocked() {
-
-        if (isBlocked == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean Check_isRentedBefore() {
-        if (isRent == true) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 

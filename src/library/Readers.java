@@ -41,9 +41,7 @@ public class Readers extends Users {
         Scanner input = new Scanner(System.in);
         while (true) {
 
-            System.out.println("TO SEARCH FOR A BOOK PRESS 1");
-            System.out.println("TO SEARCH FOR A MEMBER PRESS 2");
-            System.out.println("TO LOG OUT PRESS 3");
+            displayMenu();
             option1 = input.nextInt();
             if (option1 == 1) {
                 System.out.println("PLEASE ENTER BOOK NAME:");
@@ -111,6 +109,14 @@ public class Readers extends Users {
             }
         }
     }
+    
+    
+    public void displayMenu()
+    {
+        System.out.println("TO SEARCH FOR A BOOK PRESS 1");
+        System.out.println("TO SEARCH FOR A MEMBER PRESS 2");
+        System.out.println("TO LOG OUT PRESS 3");
+    }
 
     public void add_self_toorderlist(int User_ID, Books[] book, int bookIndex) {
         book[bookIndex].orderList[book[bookIndex].counter] = User_ID;
@@ -121,52 +127,6 @@ public class Readers extends Users {
 
 
 
-    @Override
-    public Boolean Check_isBlocked() {
+    
 
-        if (isBlocked == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean Check_isRentedBefore() {
-        if (isRent == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-
-    @Override
-    public int searchForUser(int memberID, Readers[] reader, Librarians[] admin) {
-        int memberIndex = -1;
-
-        for (int i = 0; i < 100; i++) {
-            if (memberID == reader[i].ID) {
-                memberIndex = i;
-                System.out.println("Member's ID: " + reader[i].ID);
-                System.out.println("Member's Name: " + reader[i].firstName + " " + reader[i].lastName);
-                System.out.println("Member's Email: " + reader[i].Email);
-                break;
-            }
-
-            if (i < 5) {
-                if (memberID == admin[i].ID) {
-                    memberIndex = i;
-                    System.out.println("Member's ID: " + admin[i].ID + "   (Admin)");
-                    System.out.println("Member's Name: " + admin[i].firstName + " " + admin[i].lastName);
-                    System.out.println("Member's Email: " + admin[i].Email);
-                    break;
-                }
-            }
-
-        }
-
-        return memberIndex;
-    }
 }

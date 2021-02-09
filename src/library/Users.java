@@ -29,7 +29,7 @@ public abstract class Users {
     public LocalDate rentDate;
     public LocalDate Deadline_Date;
     
-     public abstract void menu();
+     public abstract void displayMenu();
 
     public int searchForBook(String bookName, int index, Books[] book)
     {

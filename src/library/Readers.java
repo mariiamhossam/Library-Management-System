@@ -59,7 +59,10 @@ public class Readers extends Users {
                     char choice = input.next().charAt(0);
                     if (choice == 'y' || choice == 'Y') {
                         System.out.println("TO RENT THE BOOK PRESS 1");
+                        if(reader[userIndex].Book_name.equals(book[bookIndex].Name))
+                        {
                         System.out.println("TO RETURN THE BOOK PRESS 2");
+                        }
                         option1 = input.nextInt();
                         if (option1 == 1) {
                             Boolean isblocked = reader[userIndex].Check_isBlocked();
@@ -81,7 +84,7 @@ public class Readers extends Users {
                                 }
 
                             }
-                        } else if (option1 == 2) {
+                        } else if (option1 == 2 && reader[userIndex].Book_name.equals(book[bookIndex].Name)) {
                             //call return_book function
                             Return_book(book, bookIndex, reader, userIndex);
 
@@ -123,3 +126,4 @@ public class Readers extends Users {
     }
 
 }
+

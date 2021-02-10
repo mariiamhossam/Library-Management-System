@@ -101,6 +101,7 @@ public abstract class Users {
     public void Return_book(Books b[], int book_indx, Readers[] r, int user_indx) {
         b[book_indx].quantity++;
         r[user_indx].isRent = false;
+        r[user_indx].Book_name="empty";
         r[user_indx].rentDate = LocalDate.of(2030, 1, 2);
         r[user_indx].Deadline_Date = LocalDate.of(2030, 1, 2);
         System.out.println("The book has been successfully returned");

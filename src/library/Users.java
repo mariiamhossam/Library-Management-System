@@ -28,11 +28,10 @@ public abstract class Users {
     public String Book_name;
     public LocalDate rentDate;
     public LocalDate Deadline_Date;
-    
-     public abstract void displayMenu();
 
-    public int searchForBook(String bookName, int index, Books[] book)
-    {
+    public abstract void displayMenu();
+
+    public int searchForBook(String bookName, int index, Books[] book) {
         int bookIndex = -1;
         for (int i = 0; i < 200; i++) {
             if (bookName.equals(book[i].Name)) {
@@ -43,9 +42,8 @@ public abstract class Users {
         return bookIndex;
     }
 
-    public int searchForUser(int memberID, Readers[] reader, Librarians[] admin,int memberIndex)
-    {
-        
+    public int searchForUser(int memberID, Readers[] reader, Librarians[] admin) {
+        int memberIndex = -1;
         for (int i = 0; i < 100; i++) {
             if (memberID == reader[i].ID) {
                 memberIndex = i;
@@ -62,8 +60,7 @@ public abstract class Users {
         return memberIndex;
     }
 
-    public void rent(String name, Books[] book, int bookIndex)
-    {
+    public void rent(String name, Books[] book, int bookIndex) {
         isRent = true;
         Book_name = name;
         rentDate = LocalDate.now();
@@ -74,8 +71,7 @@ public abstract class Users {
         System.out.println("_______________________________________");
     }
 
-   public Boolean Check_isBlocked()
-    {
+    public Boolean Check_isBlocked() {
         if (isBlocked == true) {
             return true;
         } else {
@@ -83,8 +79,7 @@ public abstract class Users {
         }
     }
 
-    public  boolean Check_isRentedBefore()
-    {
+    public boolean Check_isRentedBefore() {
         if (isRent == true) {
             return true;
         } else {
@@ -92,8 +87,18 @@ public abstract class Users {
         }
     }
 
-    public void Return_book(Books b[], int book_indx, Readers[] r, int user_indx)
-    {
+    public void update_orderlist(Books[] book) {
+        for (int i = 0; i < 200; i++) {
+            int j = 1;
+            while (book[i].counter > 0) {
+                book[i].orderList[j - 1] = book[i].orderList[j];
+                book[i].counter--;
+                j++;
+            }
+        }
+    }
+
+    public void Return_book(Books b[], int book_indx, Readers[] r, int user_indx) {
         b[book_indx].quantity++;
         r[user_indx].isRent = false;
         r[user_indx].rentDate = LocalDate.of(2030, 1, 2);

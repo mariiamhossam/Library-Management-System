@@ -99,7 +99,10 @@ public class Librarians extends Users {
                     if (choice == 'y' || choice == 'Y') {
                         System.out.println("TO REMOVE THE BOOK PRESS 1");
                         System.out.println("TO RENT THE BOOK PRESS 2");
+                        if(admin[userIndex].Book_name.equals(book[bookIndex].Name))
+                        {
                         System.out.println("TO RETURN THE BOOK PRESS 3");
+                        }
                         option1 = input.nextInt();
                         if (option1 == 1) {
                             //call remove_book function
@@ -131,7 +134,7 @@ public class Librarians extends Users {
                                 }
 
                             }
-                        } else if (option1 == 3) {
+                        } else if (option1 == 3 && admin[userIndex].Book_name.equals(book[bookIndex].Name)) {
                             //call return_book function
                             Return_book(book, bookIndex, reader, userIndex);
                         }

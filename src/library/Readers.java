@@ -49,7 +49,7 @@ public class Readers extends Users {
                 int bookIndex = searchForBook(bookName, userIndex, book);
                 System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t\t" + "Quantity: " + book[bookIndex].quantity);
                 System.out.println("_______________________________________");
-                
+
                 if (bookIndex == -1) {
                     System.out.println("NO BOOK FOUND!");
                     System.out.println("_______________________________________");
@@ -65,17 +65,16 @@ public class Readers extends Users {
                             Boolean isblocked = reader[userIndex].Check_isBlocked();
                             Boolean isrented = reader[userIndex].Check_isRentedBefore();
                             if (isblocked == true) {
-                                System.out.println("sorry, you can't rent the book because you are blocked!");
+                                System.out.println("Sorry, you can't rent the book because you are blocked!");
                             } else if (isrented == true) {
-                                System.out.println("sorry, you can't rent more than one book");
+                                System.out.println("Sorry, you can't rent more than one book");
                             } else if (isblocked == false && isrented == false && book[bookIndex].quantity > 0) {
                                 reader[userIndex].rent(bookName, book, bookIndex);
                             } else {
-                                System.out.println("the book is not available now! Do you want to be added in the order list?(y/n)");
+                                System.out.println("The book is not available now! Do you want to be added in the order list?(y/n)");
                                 choice = input.next().charAt(0);
-                                if (choice == 'y') {
+                                if (choice == 'y' || choice == 'Y') {
                                     //call add to order list function
-
                                     bookIndex = searchForBook(bookName, userIndex, book);
                                     int userID = reader[userIndex].ID;
                                     add_self_toorderlist(userID, book, bookIndex);
@@ -85,7 +84,7 @@ public class Readers extends Users {
                         } else if (option1 == 2) {
                             //call return_book function
                             Return_book(book, bookIndex, reader, userIndex);
-                            
+
                         }
                     } else if (choice == 'n' || choice == 'N') {
                         System.out.println("______________________________");
@@ -109,10 +108,8 @@ public class Readers extends Users {
             }
         }
     }
-    
-    
-    public void displayMenu()
-    {
+
+    public void displayMenu() {
         System.out.println("TO SEARCH FOR A BOOK PRESS 1");
         System.out.println("TO SEARCH FOR A MEMBER PRESS 2");
         System.out.println("TO LOG OUT PRESS 3");
@@ -124,9 +121,5 @@ public class Readers extends Users {
         System.out.println("You have been successfully added to the order list");
         System.out.println("_______________________________________");
     }
-
-
-
-    
 
 }

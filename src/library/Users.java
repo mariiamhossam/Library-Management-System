@@ -31,7 +31,7 @@ public abstract class Users {
 
     public abstract void displayMenu();
 
-    public int searchForBook(String bookName, int index, Books[] book) {
+    public int searchForBook(String bookName, Books[] book) {
         int bookIndex = -1;
         for (int i = 0; i < 200; i++) {
             if (bookName.equals(book[i].Name)) {

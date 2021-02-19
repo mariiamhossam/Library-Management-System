@@ -83,36 +83,34 @@ public class Librarians extends Users {
                 }
 
             } else if (option1 == 3) {
-                System.out.println("PLEASE ENTER BOOK NAME:");
+                 System.out.println("PLEASE ENTER BOOK NAME:");
                 String bookName = input.next();
                 int bookIndex = searchForBook(bookName, book);
-                System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t\t" + "Quantity: " + book[bookIndex].quantity);
-                System.out.println("_______________________________________");
-
+               
                 if (bookIndex == -1) {
                     System.out.println("NO BOOK FOUND");
                     System.out.println("_______________________________________");
                     continue;
                 } else {
+                  System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t\t" + "Quantity: " + book[bookIndex].quantity);
+                System.out.println("_______________________________________"); 
                     System.out.println("Do you want to Remove, Rent or Return this book? (y/n)");
                     char choice = input.next().charAt(0);
                     if (choice == 'y' || choice == 'Y') {
                         System.out.println("TO REMOVE THE BOOK PRESS 1");
                         System.out.println("TO RENT THE BOOK PRESS 2");
-                        if(admin[userIndex].Book_name.equals(book[bookIndex].Name))
-                        {
                         System.out.println("TO RETURN THE BOOK PRESS 3");
-                        }
                         option1 = input.nextInt();
                         if (option1 == 1) {
                             //call remove_book function
-                            remove_book(book);
+                            remove_book(book,bookIndex);
                             System.out.println(" DO You want to Continue? yes/no ");
-                            /*String ans;
-                      ans=input.next();
-                      if(ans.equals("no")){
-                      break;
-                             *////
+                            String ans;
+                       ans=input.next();
+                       if(ans.equals("no")){
+                       break;
+                           }
+                             
                         } else if (option1 == 2) {
 
                             Boolean isblocked = admin[userIndex].Check_isBlocked();
@@ -134,7 +132,7 @@ public class Librarians extends Users {
                                 }
 
                             }
-                        } else if (option1 == 3 && admin[userIndex].Book_name.equals(book[bookIndex].Name)) {
+                        } else if (option1 == 3) {
                             //call return_book function
                             Return_book(book, bookIndex, reader, userIndex);
                         }
@@ -243,38 +241,24 @@ public class Librarians extends Users {
         System.out.println("The Book is Successfully Added!");
     }
 
-//    public void remove_book(Books[] book,int bookIndex) {
-//        int length = book.length;
-//
-//        
-//        for (int i = bookIndex; i < length; i++) {
-//           
-//                book[i] = book[length - 1];
-//                length--;
-//                System.out.println("The Book is Successfully Removed!");
-//                break;
-//            
-//            
-//        }
-//    }
-    public void remove_book(Books[] book) {
-        int length = book.length;
-        Scanner input = new Scanner(System.in);
+    public void remove_book(Books[] book,int bookIndex) {
+         String Rmv_book=book[bookIndex].Name;
+      for(int i=0;i<book.length;i++) {
+      if(book[i].Name.equals(Rmv_book)) {
+      book[i].Name="empty";
+          book[i].quantity=0;
+          book[i].type="empty";
+          book[i].counter=0; 
+          System.out.println("The Book Successfully Removed!");
+          break;
+      } 
+    }  //shifting the empty index
+      for(int i=0;i<200;i++) {
+      if(book[i].Name.equals("empty")) {
+          for(int j=i;j<199;j++)
+          book[j]=book[j+1]; }
+      }
 
-        String Rmv_book;
-        Rmv_book = input.next();
-
-        for (int i = 0; i < length; i++) {
-            if (book[i].Name.equals(Rmv_book) && book[i] != null) {
-                book[i] = book[length - 1];
-                length--;
-                System.out.println("The Book is Successfully Removed!");
-                break;
-            }
-            if (i == length - 1) {
-                System.out.println("This Book isn't found");
-            }
-        }
     }
     Scanner input2 = new Scanner(System.in);
 

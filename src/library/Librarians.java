@@ -508,58 +508,5 @@ public class Librarians extends Users {
         }
     }
 
-    //@Override
-    public int searchForUser(int memberID, Readers[] reader, Librarians[] admin) {
-        int memberIndex = -1;
-        for (int i = 0; i < 100; i++) {
-            if (memberID == reader[i].ID) {
-                memberIndex = i;
-                System.out.println("Member's ID: " + reader[i].ID);
-                System.out.println("Member's Name: " + reader[i].firstName + " " + reader[i].lastName);
-                System.out.println("Member's Email: " + reader[i].Email);
-                System.out.println("Member's Address: " + reader[i].address);
-                System.out.println("Member's Phone Number: " + reader[i].cellPhone);
-                System.out.println("Member's Status:");
-                if (reader[i].isBlocked == true) {
-                    System.out.println("\t" + "Blocked");
-                } else {
-                    System.out.println("\t" + "Not Blocked");
-                }
-
-                if (reader[i].isRent == true) {
-                    System.out.println("\t" + "Already Rented a Book (Book Name: " + reader[i].Book_name + ", Rent Date: " + reader[i].rentDate + ", Deadline: " + reader[i].Deadline_Date + ") ");
-                } else {
-                    System.out.println("\t" + "Not Rented a Book");
-                }
-
-                break;
-            }
-            if (i < 5) {
-                if (memberID == admin[i].ID) {
-                    memberIndex = i;
-                    System.out.println("Member's ID: " + admin[i].ID + "   (Admin)");
-                    System.out.println("Member's Name: " + admin[i].firstName + " " + admin[i].lastName);
-                    System.out.println("Member's Email: " + admin[i].Email);
-                    System.out.println("Member's Address: " + admin[i].address);
-                    System.out.println("Member's Phone Number: " + admin[i].cellPhone);
-                    System.out.println("Member's Status:");
-                    if (admin[i].isBlocked == true) {
-                        System.out.println("\t" + "Blocked");
-                    } else {
-                        System.out.println("\t" + "Not Blocked");
-                    }
-
-                    if (admin[i].isRent == true) {
-                        System.out.println("\t" + "Already Rented a Book (Book Name: " + admin[i].Book_name + ", Rent Date: " + admin[i].rentDate + ", Deadline: " + admin[i].Deadline_Date + ") ");
-                    } else {
-                        System.out.println("\t" + "Not Rented a Book");
-                    }
-
-                    break;
-                }
-
-            }
-        }
-        return memberIndex;
-    }
+   
 }

@@ -85,7 +85,7 @@ public class Librarians extends Users {
             } else if (option1 == 3) {
                 System.out.println("PLEASE ENTER BOOK NAME:");
                 String bookName = input.next();
-                int bookIndex = searchForBook(bookName, userIndex, book);
+                int bookIndex = searchForBook(bookName, book);
                 System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t\t" + "Quantity: " + book[bookIndex].quantity);
                 System.out.println("_______________________________________");
 
@@ -128,7 +128,7 @@ public class Librarians extends Users {
                                 choice = input.next().charAt(0);
                                 if (choice == 'y' || choice == 'Y') {
                                     //call add to order list function
-                                    bookIndex = searchForBook(bookName, userIndex, book);
+                                    bookIndex = searchForBook(bookName, book);
                                     int userID = admin[userIndex].ID;
                                     add_user_orderlist(userID, book, bookIndex);
                                 }
@@ -169,7 +169,7 @@ public class Librarians extends Users {
                 System.out.println("PLEASE ENTER BOOK NAME TO SHOW ITS ORDER LIST:");
                 String bookName = input.next();
 
-                int bookIndex = searchForBook(bookName, userIndex, book);
+                int bookIndex = searchForBook(bookName, book);
 
                 show_orderlist(reader, admin, book, bookIndex);
 

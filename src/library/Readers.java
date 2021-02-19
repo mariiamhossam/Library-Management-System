@@ -46,7 +46,7 @@ public class Readers extends Users {
             if (option1 == 1) {
                 System.out.println("PLEASE ENTER BOOK NAME:");
                 String bookName = input.next();
-                int bookIndex = searchForBook(bookName, userIndex, book);
+                int bookIndex = searchForBook(bookName, book);
                 System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t\t" + "Quantity: " + book[bookIndex].quantity);
                 System.out.println("_______________________________________");
 
@@ -78,7 +78,7 @@ public class Readers extends Users {
                                 choice = input.next().charAt(0);
                                 if (choice == 'y' || choice == 'Y') {
                                     //call add to order list function
-                                    bookIndex = searchForBook(bookName, userIndex, book);
+                                    bookIndex = searchForBook(bookName, book);
                                     int userID = reader[userIndex].ID;
                                     add_self_toorderlist(userID, book, bookIndex);
                                 }

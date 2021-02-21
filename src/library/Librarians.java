@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Library;
+package Library.users;
 
+import Library.Books;
+import Library.users.Readers;
 import java.util.Scanner;
 import java.time.*;
 
@@ -16,19 +18,20 @@ public class Librarians extends Users {
 
     Scanner input = new Scanner(System.in);
 
+    
     public Librarians() {
     }
 
     public Librarians(int ID, String Email, String password, String type, String firstName, String lastName,
             String address, String cellPhone, boolean isBlocked, boolean isRent, String Book_name, LocalDate rentDate, LocalDate Deadline_Date) {
-        this.ID = ID;
+        setID(ID);
         this.Email = Email;
-        this.password = password;
+        setPassword(password);
         this.type = type;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.cellPhone = cellPhone;
+        setCellPhone(cellPhone);
         this.isBlocked = isBlocked;
         this.isRent = isRent;
         this.Book_name = Book_name;
@@ -70,7 +73,7 @@ public class Librarians extends Users {
                 String answer;
                 for (int i = 0; i < 100; i++) {
                     addindx = i;
-                    if (reader[i].ID == 0) {
+                    if (reader[i].getID() == 0) {
 
                         add_user(reader, addindx, admin);
                         System.out.println("DO YOU WANT TO CONTINUE: yes/no");
@@ -104,12 +107,8 @@ public class Librarians extends Users {
                         if (option1 == 1) {
                             //call remove_book function
                             remove_book(book,bookIndex);
-                            System.out.println(" DO You want to Continue? yes/no ");
-                            String ans;
-                       ans=input.next();
-                       if(ans.equals("no")){
-                       break;
-                           }
+                             System.out.println("_______________________________________");
+
                              
                         } else if (option1 == 2) {
 
@@ -127,14 +126,14 @@ public class Librarians extends Users {
                                 if (choice == 'y' || choice == 'Y') {
                                     //call add to order list function
                                     bookIndex = searchForBook(bookName, book);
-                                    int userID = admin[userIndex].ID;
+                                    int userID = admin[userIndex].getID();
                                     add_user_orderlist(userID, book, bookIndex);
                                 }
 
                             }
                         } else if (option1 == 3) {
                             //call return_book function
-                            Return_book(book, bookIndex, reader, userIndex);
+                            admin[userIndex].Return_book(book, bookIndex);
                         }
                     } else if (choice == 'n' || choice == 'N') {
                         System.out.println("_______________________________________");
@@ -150,6 +149,27 @@ public class Librarians extends Users {
                     System.out.println("NO MEMBER FOUND!");
                     continue;
                 }
+                
+                else{
+                    System.out.println("Member's ID: " + reader[memberIndex].getID());
+                System.out.println("Member's Name: " + reader[memberIndex].firstName + " " + reader[memberIndex].lastName);
+                System.out.println("Member's Email: " + reader[memberIndex].Email);
+                System.out.println("Member's Address: " + reader[memberIndex].address);
+                System.out.println("Member's Phone Number: " + reader[memberIndex].getCellPhone());
+                System.out.println("Member's Status:");
+                if (reader[memberIndex].isBlocked == true) {
+                    System.out.println("\t" + "Blocked");
+                } else {
+                    System.out.println("\t" + "Not Blocked");
+                }
+                if (reader[memberIndex].isRent == true) {
+                    System.out.println("\t" + "Already Rented a Book (Book Name: " + reader[memberIndex].Book_name + ", Rent Date: " + reader[memberIndex].rentDate + ", Deadline: " + reader[memberIndex].Deadline_Date + ") ");
+                } else {
+                    System.out.println("\t" + "Not Rented a Book");
+                    System.out.println("_______________________________________");
+                }
+                }
+                
 
                 System.out.println("DO YOU WANT TO REMOVE THE USER? (y/n)");
 
@@ -181,7 +201,7 @@ public class Librarians extends Users {
 
                     int choice = input.nextInt();
 
-                    int userID = admin[userIndex].ID;
+                    int userID = admin[userIndex].getID();
                     if (choice == 2) {
                         System.out.println("PLEASE ENTER USER'S ID");
                         userID = input.nextInt();
@@ -241,6 +261,7 @@ public class Librarians extends Users {
         System.out.println("The Book is Successfully Added!");
     }
 
+
     public void remove_book(Books[] book,int bookIndex) {
          String Rmv_book=book[bookIndex].Name;
       for(int i=0;i<book.length;i++) {
@@ -265,20 +286,20 @@ public class Librarians extends Users {
     public void add_user(Readers[] r, int indx, Librarians[] admins) {
 
         System.out.println("PLEASE ENTER THE USER ID: ");
-        r[indx].ID = input2.nextInt();
+        r[indx].setID(input2.nextInt());
 
         while (true) {
             int countr = 0; //count to check there is a readeer id equals to another reader id
             int countad = 0;  //count to check there is an admin id equals to another admin id 
             for (int i = 0; i < indx; i++) {
 
-                if (r[indx].ID == r[i].ID) {
+                if (r[indx].getID() == r[i].getID()) {
                     countr = 1;
                     break;
                 }
             }
             for (int i = 0; i < 5; i++) {
-                if (r[indx].ID == admins[i].ID) {
+                if (r[indx].getID() == admins[i].getID()) {
                     countad = 1;
                     break;
                 }
@@ -286,7 +307,7 @@ public class Librarians extends Users {
 
             if (countr == 1 || countad == 1) {
                 System.out.println("PLEASE ENTER ANOTHER ID AS IT IS ALREADY FOUND: ");
-                r[indx].ID = input2.nextInt();
+                r[indx].setID(input2.nextInt());
             } else if (countr == 0 && countad == 0) {
                 break;
             }
@@ -294,19 +315,19 @@ public class Librarians extends Users {
         System.out.println("PLEASE ENTER THE USER EMAIL: ");
         r[indx].Email = input2.next();
         System.out.println("PLEASE ENTER THE USER PASSWORD: ");
-        r[indx].password = input2.next();
+        r[indx].setPassword(input2.next());
         while (true) {
             int count1 = 0;
             for (int i = 0; i < indx; i++) {
-                String pass = r[i].password;
-                if (r[indx].password.equals(pass)) {
+                String pass = r[i].getPassword();
+                if (r[indx].getPassword().equals(pass)) {
                     count1 = 1;
                     break;
                 }
             }
             if (count1 == 1) {
                 System.out.println(("PLEASE ENTER ANOTHER PAssword: "));
-                r[indx].password = input2.next();
+                r[indx].setPassword(input2.next());
             } else if (count1 == 0) {
                 break;
             }
@@ -319,14 +340,14 @@ public class Librarians extends Users {
         System.out.println("PLEASE ENTER THE USER ADDRESS: ");
         r[indx].address = input2.next();
         System.out.println("PLEASE ENTER THE USER CELL PHONE : ");
-        r[indx].cellPhone = input2.next();
+        r[indx].setCellPhone(input2.next());
         int length;
 
         while (true) {
-            length = r[indx].cellPhone.length();
+            length = r[indx].getCellPhone().length();
             if (length != 11) {
                 System.out.println("PLEASE ENTER A CORRECT NUMBER PHONE NOT LESS THAN 11 DIGITS AND NOT MORE THAN 11: ");
-                r[indx].cellPhone = input2.next();
+                r[indx].setCellPhone(input2.next());
             } else if (length == 11) {
                 break;
             }
@@ -334,10 +355,10 @@ public class Librarians extends Users {
 
         while (true) {
             char c1 = '0';
-            char c = r[indx].cellPhone.charAt(0);
+            char c = r[indx].getCellPhone().charAt(0);
             if (c != c1) {
                 System.out.println("PLEASE ENTER ANOTHE PHONE NUMBER STARTS WITH ZERO: ");
-                r[indx].cellPhone = input2.next();
+                r[indx].setCellPhone(input2.next());
             } else if (c == c1) {
                 break;
             }
@@ -353,14 +374,14 @@ public class Librarians extends Users {
         for (int i = 0; i < 100; i++) {
             if (i == membindx) {
                 if (membindx == 99) {
-                    r[membindx].ID = 0;
+                    r[membindx].setID(0); 
                     r[membindx].Email = "empty";
                     r[membindx].address = "empty";
-                    r[membindx].cellPhone = "empty";
+                    r[membindx].setCellPhone("empty");
                     r[membindx].Book_name = "empty";
                     r[membindx].firstName = "empty";
                     r[membindx].lastName = "empty";
-                    r[membindx].password = "empty";
+                    r[membindx].setPassword("empty"); 
                     r[membindx].isBlocked = false;
                     r[membindx].isRent = false;
                     r[membindx].rentDate = LocalDate.of(2030, 1, 1);
@@ -391,16 +412,16 @@ public class Librarians extends Users {
             System.out.println("Info of user no. #" + (i + 1) + " in the Order List:");
             int current = book[bookIndex].orderList[i];
             for (int j = 0; j < 100; j++) {
-                if (current == reader[j].ID) {
-                    System.out.println("Member's ID: " + reader[j].ID + " (Reader)");
+                if (current == reader[j].getID()) {
+                    System.out.println("Member's ID: " + reader[j].getID() + " (Reader)");
                     System.out.println("Member's Name: " + reader[j].firstName + " " + reader[j].lastName);
                     System.out.println("Member's Email: " + reader[j].Email);
                     break;
                 }
 
                 if (j < 5) {
-                    if (current == admin[j].ID) {
-                        System.out.println("Member's ID: " + admin[j].ID + " (Admin)");
+                    if (current == admin[j].getID()) {
+                        System.out.println("Member's ID: " + admin[j].getID() + " (Admin)");
                         System.out.println("Member's Name: " + admin[j].firstName + " " + admin[j].lastName);
                         System.out.println("Member's Email: " + admin[j].Email);
                         System.out.println("--------------------------------");

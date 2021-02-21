@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Library;
+package Library.users;
 
+import Library.Books;
+import Library.users.Librarians;
+import Library.users.Readers;
 import java.time.*;
 //import java.text.SimpleDateFormat;  
 //import java.text.ParseException; 
@@ -15,23 +18,50 @@ import java.time.*;
  */
 public abstract class Users {
 
-    public int ID;
+    private int ID;
+
+
     public String Email;
-    public String password;
+    private String password;
+
     public String type;
     public String firstName;
     public String lastName;
     public String address;
-    public String cellPhone;
+    private String cellPhone;
+
     public boolean isBlocked;
     public boolean isRent;
     public String Book_name;
     public LocalDate rentDate;
     public LocalDate Deadline_Date;
+    
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    public int getID() {
+        return ID;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+    
+    public String getCellPhone() {
+        return cellPhone;
+    }
+
+    public void setCellPhone(String cellPhone) {
+        this.cellPhone = cellPhone;
+    }
+    
     public abstract void displayMenu();
 
-    public int searchForBook(String bookName, Books[] book) {
+    protected int searchForBook(String bookName, Books[] book) {
         int bookIndex = -1;
         for (int i = 0; i < 200; i++) {
             if (bookName.equals(book[i].Name)) {
@@ -42,15 +72,15 @@ public abstract class Users {
         return bookIndex;
     }
 
-    public int searchForUser(int memberID, Readers[] reader, Librarians[] admin) {
+    protected int searchForUser(int memberID, Readers[] reader, Librarians[] admin) {
         int memberIndex = -1;
         for (int i = 0; i < 100; i++) {
-            if (memberID == reader[i].ID) {
+            if (memberID == reader[i].getID()) {
                 memberIndex = i;
                 break;
             }
             if (i < 5) {
-                if (memberID == admin[i].ID) {
+                if (memberID == admin[i].getID()) {
                     memberIndex = i;
                     break;
                 }
@@ -60,7 +90,7 @@ public abstract class Users {
         return memberIndex;
     }
 
-    public void rent(String name, Books[] book, int bookIndex) {
+    protected void rent(String name, Books[] book, int bookIndex) {
         isRent = true;
         Book_name = name;
         rentDate = LocalDate.now();
@@ -71,7 +101,7 @@ public abstract class Users {
         System.out.println("_______________________________________");
     }
 
-    public Boolean Check_isBlocked() {
+    protected Boolean Check_isBlocked() {
         if (isBlocked == true) {
             return true;
         } else {
@@ -79,7 +109,7 @@ public abstract class Users {
         }
     }
 
-    public boolean Check_isRentedBefore() {
+    protected boolean Check_isRentedBefore() {
         if (isRent == true) {
             return true;
         } else {
@@ -87,7 +117,7 @@ public abstract class Users {
         }
     }
 
-    public void update_orderlist(Books[] book) {
+    protected void update_orderlist(Books[] book) {
         for (int i = 0; i < 200; i++) {
             int j = 1;
             while (book[i].counter > 0) {
@@ -98,12 +128,12 @@ public abstract class Users {
         }
     }
 
-    public void Return_book(Books b[], int book_indx, Readers[] r, int user_indx) {
+    protected void Return_book(Books b[], int book_indx) {
         b[book_indx].quantity++;
-        r[user_indx].isRent = false;
-        r[user_indx].Book_name="empty";
-        r[user_indx].rentDate = LocalDate.of(2030, 1, 2);
-        r[user_indx].Deadline_Date = LocalDate.of(2030, 1, 2);
+        isRent = false;
+        Book_name="empty";
+        rentDate = LocalDate.of(2030, 1, 2);
+        Deadline_Date = LocalDate.of(2030, 1, 2);
         System.out.println("The book has been successfully returned");
         System.out.println("_______________________________________");
     }

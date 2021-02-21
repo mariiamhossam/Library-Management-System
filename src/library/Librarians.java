@@ -260,30 +260,30 @@ public class Librarians extends Users {
         book[nxt_book].type = input.next();
         System.out.println("The Book is Successfully Added!");
     }
-
-
-    public void remove_book(Books[] book,int bookIndex) {
-         String Rmv_book=book[bookIndex].Name;
-      for(int i=0;i<book.length;i++) {
-      if(book[i].Name.equals(Rmv_book)) {
-      book[i].Name="empty";
-          book[i].quantity=0;
-          book[i].type="empty";
-          book[i].counter=0; 
-          System.out.println("The Book Successfully Removed!");
-          break;
-      } 
-    }  //shifting the empty index
-      for(int i=0;i<200;i++) {
-      if(book[i].Name.equals("empty")) {
-          for(int j=i;j<199;j++)
-          book[j]=book[j+1]; }
-      }
-
+    
+     public void remove_book(Books[] book,int bookIndex) 
+    {
+        
+        for (int i = bookIndex; i < 200-1; i++) 
+        {
+            if(book[i].Name=="empty")
+            {
+               break;
+            }
+            else
+            {
+               book[i] = book[i+1];
+            }
+        }
+        
+        System.out.println("The Book is Successfully Removed!");
+        System.out.println("_______________________________________");
+       
     }
-    Scanner input2 = new Scanner(System.in);
+    
 
     public void add_user(Readers[] r, int indx, Librarians[] admins) {
+        Scanner input2 = new Scanner(System.in);
 
         System.out.println("PLEASE ENTER THE USER ID: ");
         r[indx].setID(input2.nextInt());

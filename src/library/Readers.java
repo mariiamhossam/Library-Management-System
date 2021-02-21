@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Library;
+package Library.users;
 
+import Library.Books;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -20,14 +21,14 @@ public class Readers extends Users {
 
     public Readers(int ID, String Email, String password, String type, String firstName, String lastName,
             String address, String cellPhone, boolean isBlocked, boolean isRent, String Book_name, LocalDate rentDate, LocalDate Deadline_Date) {
-        this.ID = ID;
+        setID(ID); 
         this.Email = Email;
-        this.password = password;
+        setPassword(password);
         this.type = type;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.cellPhone = cellPhone;
+        setCellPhone(cellPhone); 
         this.isBlocked = isBlocked;
         this.isRent = isRent;
         this.Book_name = Book_name;
@@ -79,14 +80,14 @@ public class Readers extends Users {
                                 if (choice == 'y' || choice == 'Y') {
                                     //call add to order list function
                                     bookIndex = searchForBook(bookName, book);
-                                    int userID = reader[userIndex].ID;
+                                    int userID = reader[userIndex].getID();
                                     add_self_toorderlist(userID, book, bookIndex);
                                 }
 
                             }
                         } else if (option1 == 2 && reader[userIndex].Book_name.equals(book[bookIndex].Name)) {
                             //call return_book function
-                            Return_book(book, bookIndex, reader, userIndex);
+                            reader[userIndex].Return_book(book, bookIndex);
 
                         }
                     } else if (choice == 'n' || choice == 'N') {
@@ -105,10 +106,31 @@ public class Readers extends Users {
                     System.out.println("_______________________________________");
                     continue;
                 }
+                else{
+                    if(memberID==reader[memberIndex].getID())
+            {
+               
+                System.out.println("Member's ID: "+reader[memberIndex].getID());
+                System.out.println("Member's Name: "+reader[memberIndex].firstName+" "+reader[memberIndex].lastName);
+                System.out.println("Member's Email: "+reader[memberIndex].Email);
+                break;
+            }
+            if(memberIndex<5)
+            {
+              if(memberID==admin[memberIndex].getID())
+              {
+                
+                System.out.println("Member's ID: "+admin[memberIndex].getID()+"   (Admin)");
+                System.out.println("Member's Name: "+admin[memberIndex].firstName+" "+admin[memberIndex].lastName);
+                System.out.println("Member's Email: "+admin[memberIndex].Email);
+                System.out.println("_______________________________________");
+                }
 
             } else if (option1 == 3) {
                 break;
             }
+        }
+    }
         }
     }
 

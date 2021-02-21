@@ -280,10 +280,12 @@ public class Librarians extends Users {
         System.out.println("_______________________________________");
        
     }
-    
+
+
+    Scanner input2 = new Scanner(System.in);
 
     public void add_user(Readers[] r, int indx, Librarians[] admins) {
-        Scanner input2 = new Scanner(System.in);
+        
 
         System.out.println("PLEASE ENTER THE USER ID: ");
         r[indx].setID(input2.nextInt());

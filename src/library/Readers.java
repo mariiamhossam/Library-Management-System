@@ -43,6 +43,7 @@ public class Readers extends Users {
         while (true) {
 
             displayMenu();
+            update_orderlist(book);
             option1 = input.nextInt();
             if (option1 == 1) {
                 System.out.println("PLEASE ENTER BOOK NAME:");

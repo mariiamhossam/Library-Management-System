@@ -46,7 +46,7 @@ public class Librarians extends Users {
         while (true) {
 
             displayMenu();
-            super.update_orderlist(book);
+            update_orderlist(book);
             option1 = input.nextInt();
             if (option1 == 1) {
 
@@ -107,7 +107,7 @@ public class Librarians extends Users {
                         if (option1 == 1) {
                             //call remove_book function
                             remove_book(book,bookIndex);
-                             System.out.println("_______________________________________");
+                            
 
                              
                         } else if (option1 == 2) {
@@ -147,6 +147,7 @@ public class Librarians extends Users {
 
                 if (memberIndex == -1) {
                     System.out.println("NO MEMBER FOUND!");
+                    System.out.println("_______________________________________"); 
                     continue;
                 }
                 
@@ -189,10 +190,12 @@ public class Librarians extends Users {
 
                 int bookIndex = searchForBook(bookName, book);
 
-                show_orderlist(reader, admin, book, bookIndex);
+                boolean empty=show_orderlist(reader, admin, book, bookIndex);
 
                 System.out.println("TO ADD USER TO ORDER LIST PRESS 1");
+                if(empty!=true){
                 System.out.println("TO REMOVE USER FROM ORDER LIST PRESS 2");
+                }
                 System.out.println("TO RETURN TO THE MENU PRESS 3");
                 option1 = input.nextInt();
                 if (option1 != 3) {
@@ -229,6 +232,7 @@ public class Librarians extends Users {
                     }
                 } else if (isFound == false) {
                     System.out.println("THE LIST IS EMPTY!");
+                    System.out.println("_______________________________________"); 
                 }
             } else if (option1 == 7) {
                 break;
@@ -405,9 +409,11 @@ public class Librarians extends Users {
         System.out.println("_______________________________________");
     }
 
-    public void show_orderlist(Readers[] reader, Librarians[] admin, Books[] book, int bookIndex) {
+    public boolean show_orderlist(Readers[] reader, Librarians[] admin, Books[] book, int bookIndex) {
+        boolean empty=false;
         if (book[bookIndex].counter == 0) {
             System.out.println("The book " + book[bookIndex].Name + " has no users in it's orderlist.");
+            System.out.println("_______________________________________"); 
             return;
         }
         for (int i = 0; i < book[bookIndex].counter; i++) {
@@ -434,6 +440,7 @@ public class Librarians extends Users {
             }
 
         }
+        return empty;
     }
 
     public void add_user_orderlist(int User_ID, Books[] book, int bookIndex) {

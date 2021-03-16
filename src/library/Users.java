@@ -137,4 +137,12 @@ public abstract class Users {
         System.out.println("The book has been successfully returned");
         System.out.println("_______________________________________");
     }
+    
+    public void add_user_to_orderlist(int User_ID, Books[] book, int bookIndex) {
+        book[bookIndex].orderList[book[bookIndex].counter] = User_ID;
+        book[bookIndex].counter++;
+        System.out.println("The addition process is successfully done");
+        System.out.println("_______________________________________");
+    }
 }
+    

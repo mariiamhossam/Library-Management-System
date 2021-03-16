@@ -9,6 +9,7 @@ import Library.Books;
 import Library.users.Readers;
 import java.util.Scanner;
 import java.time.*;
+import java.util.Optional;
 
 /**
  *
@@ -91,7 +92,7 @@ public class Librarians extends Users {
                 int bookIndex = searchForBook(bookName, book);
                
                 if (bookIndex == -1) {
-                    System.out.println("NO BOOK FOUND");
+                    System.out.println("NO BOOK IS FOUND");
                     System.out.println("_______________________________________");
                     continue;
                 } else {
@@ -102,7 +103,9 @@ public class Librarians extends Users {
                     if (choice == 'y' || choice == 'Y') {
                         System.out.println("TO REMOVE THE BOOK PRESS 1");
                         System.out.println("TO RENT THE BOOK PRESS 2");
-                        System.out.println("TO RETURN THE BOOK PRESS 3");
+                        if(admin[userIndex].Book_name.equals(book[bookIndex].Name)){
+                          System.out.println("TO RETURN THE BOOK PRESS 3");
+                        }
                         option1 = input.nextInt();
                         if (option1 == 1) {
                             //call remove_book function
@@ -265,7 +268,27 @@ public class Librarians extends Users {
         System.out.println("The Book is Successfully Added!");
     }
     
-    public void remove_book(Books[] book,int bookIndex) {
+//     public void remove_book(Books[] book,int bookIndex) 
+//    {
+//        
+//        for (int i = bookIndex; i < 200-1; i++) 
+//        {
+//            if(book[i].Name=="empty")
+//            {
+//               break;
+//            }
+//            else
+//            {
+//               book[i] = book[i+1];
+//            }
+//        }
+//        
+//        System.out.println("The Book is Successfully Removed!");
+//        System.out.println("_______________________________________");
+//       
+//    }
+
+         public void remove_book(Books[] book,int bookIndex) {
          String Rmv_book=book[bookIndex].Name;
       for(int i=0;i<book.length;i++) {
       if(book[i].Name.equals(Rmv_book)) {
@@ -283,7 +306,7 @@ public class Librarians extends Users {
           book[j]=book[j+1]; }
       }
 
-
+    }
 
     Scanner input2 = new Scanner(System.in);
 
@@ -411,9 +434,10 @@ public class Librarians extends Users {
     public boolean show_orderlist(Readers[] reader, Librarians[] admin, Books[] book, int bookIndex) {
         boolean empty=false;
         if (book[bookIndex].counter == 0) {
+            empty=true;
             System.out.println("The book " + book[bookIndex].Name + " has no users in it's orderlist.");
             System.out.println("_______________________________________"); 
-            return;
+            //return;
         }
         for (int i = 0; i < book[bookIndex].counter; i++) {
             System.out.println("Info of user no. #" + (i + 1) + " in the Order List:");

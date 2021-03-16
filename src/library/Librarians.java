@@ -130,7 +130,7 @@ public class Librarians extends Users {
                                     //call add to order list function
                                     bookIndex = searchForBook(bookName, book);
                                     int userID = admin[userIndex].getID();
-                                    add_user_orderlist(userID, book, bookIndex);
+                                    add_user_to_orderlist(userID, book, bookIndex);
                                 }
 
                             }
@@ -215,7 +215,7 @@ public class Librarians extends Users {
 
                     if (option1 == 1) {
                         //call add to order list function
-                        add_user_orderlist(userID, book, bookIndex);
+                        add_user_to_orderlist(userID, book, bookIndex);
                     } else if (option1 == 2) {
                         //call remove from order list function
                         remove_user_orderlist(userID, book, bookIndex);
@@ -439,6 +439,7 @@ public class Librarians extends Users {
             System.out.println("_______________________________________"); 
             //return;
         }
+        else{
         for (int i = 0; i < book[bookIndex].counter; i++) {
             System.out.println("Info of user no. #" + (i + 1) + " in the Order List:");
             int current = book[bookIndex].orderList[i];
@@ -447,6 +448,7 @@ public class Librarians extends Users {
                     System.out.println("Member's ID: " + reader[j].getID() + " (Reader)");
                     System.out.println("Member's Name: " + reader[j].firstName + " " + reader[j].lastName);
                     System.out.println("Member's Email: " + reader[j].Email);
+                    System.out.println("--------------------------------");
                     break;
                 }
 
@@ -463,15 +465,11 @@ public class Librarians extends Users {
             }
 
         }
+    }
         return empty;
     }
 
-    public void add_user_orderlist(int User_ID, Books[] book, int bookIndex) {
-        book[bookIndex].orderList[book[bookIndex].counter] = User_ID;
-        book[bookIndex].counter++;
-        System.out.println("The addition process is successfully done");
-        System.out.println("_______________________________________");
-    }
+    
 
     public void remove_user_orderlist(int User_ID, Books[] book, int bookIndex) {
         int index = -1;

@@ -49,14 +49,15 @@ public class Readers extends Users {
                 System.out.println("PLEASE ENTER BOOK NAME:");
                 String bookName = input.next();
                 int bookIndex = searchForBook(bookName, book);
-                System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t\t" + "Quantity: " + book[bookIndex].quantity);
-                System.out.println("_______________________________________");
+                
 
                 if (bookIndex == -1) {
-                    System.out.println("NO BOOK FOUND!");
+                    System.out.println("NO BOOK IS FOUND!");
                     System.out.println("_______________________________________");
                     continue;
                 } else {
+                    System.out.println("Book Name: " + book[bookIndex].Name + "\t" + "Type: " + book[bookIndex].type + "\t\t" + "Quantity: " + book[bookIndex].quantity);
+                System.out.println("_______________________________________");
                     System.out.println("Do you want to rent or return this book? (y/n)");
                     char choice = input.next().charAt(0);
                     if (choice == 'y' || choice == 'Y') {
@@ -109,29 +110,32 @@ public class Readers extends Users {
                 }
                 else{
                     if(memberID==reader[memberIndex].getID())
-            {
+                    {
                
                 System.out.println("Member's ID: "+reader[memberIndex].getID());
                 System.out.println("Member's Name: "+reader[memberIndex].firstName+" "+reader[memberIndex].lastName);
                 System.out.println("Member's Email: "+reader[memberIndex].Email);
-                break;
-            }
-            if(memberIndex<5)
-            {
-              if(memberID==admin[memberIndex].getID())
-              {
-                
-                System.out.println("Member's ID: "+admin[memberIndex].getID()+"   (Admin)");
-                System.out.println("Member's Name: "+admin[memberIndex].firstName+" "+admin[memberIndex].lastName);
-                System.out.println("Member's Email: "+admin[memberIndex].Email);
                 System.out.println("_______________________________________");
                 }
-
-            } else if (option1 == 3) {
+             if(memberIndex<5)
+             {
+               if(memberID==admin[memberIndex].getID())
+               {
+                 
+                 System.out.println("Member's ID: "+admin[memberIndex].getID()+"   (Admin)");
+                 System.out.println("Member's Name: "+admin[memberIndex].firstName+" "+admin[memberIndex].lastName);
+                 System.out.println("Member's Email: "+admin[memberIndex].Email);
+                 System.out.println("_______________________________________");
+               }
+             } 
+            
+        }
+              
+    }
+              else if (option1 == 3) 
+            {
                 break;
             }
-        }
-    }
         }
     }
 

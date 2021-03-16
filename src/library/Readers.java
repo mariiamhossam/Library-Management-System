@@ -83,7 +83,7 @@ public class Readers extends Users {
                                     //call add to order list function
                                     bookIndex = searchForBook(bookName, book);
                                     int userID = reader[userIndex].getID();
-                                    add_self_toorderlist(userID, book, bookIndex);
+                                    add_user_to_orderlist(userID, book, bookIndex);
                                 }
 
                             }
@@ -145,12 +145,7 @@ public class Readers extends Users {
         System.out.println("TO LOG OUT PRESS 3");
     }
 
-    public void add_self_toorderlist(int User_ID, Books[] book, int bookIndex) {
-        book[bookIndex].orderList[book[bookIndex].counter] = User_ID;
-        book[bookIndex].counter++;
-        System.out.println("You have been successfully added to the order list");
-        System.out.println("_______________________________________");
-    }
+    
 
 }
 

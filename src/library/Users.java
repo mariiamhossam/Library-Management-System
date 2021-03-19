@@ -117,14 +117,32 @@ public abstract class Users {
         }
     }
     
-    protected void update_orderlist(Books[] book) {
+    protected void update_orderlist(Books[] book, Readers[] reader, Librarians[] admin) {
         for (int i = 0; i < 200; i++) {
             int j = 1;
             if(book[i].quantity>0){
             while (book[i].counter > 0) {
+                int id = book[i].orderList[j - 1];
                 book[i].orderList[j - 1] = book[i].orderList[j];
                 book[i].counter--;
                 j++;
+                
+                boolean User_Flag = false;
+                for(int ii = 0; ii < 100; ii++)
+                {
+                    if(reader[ii].ID == id){
+                        reader[ii].isRent = true;
+                        User_Flag = true;
+                        break;
+                    }
+                }
+                for(int ii = 0; ii < 100 && !User_Flag; ii++)
+                {
+                    if(admin[ii].ID == id){
+                        admin[ii].isRent = true;
+                        break;
+                    }
+                }
             }
         }
         }

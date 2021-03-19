@@ -137,7 +137,7 @@ public class Librarians extends Users {
                         } else if (option1 == 3) {
                             //call return_book function
                             admin[userIndex].Return_book(book, bookIndex);
-                            update_orderlist(book);
+                            update_orderlist(book, reader, admin);
                             
                         }
                     } else if (choice == 'n' || choice == 'N') {

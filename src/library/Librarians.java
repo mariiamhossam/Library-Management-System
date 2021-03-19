@@ -221,7 +221,6 @@ public class Librarians extends Users {
                     } else if (option1 == 2) {
                         //call remove from order list function
                         remove_user_orderlist(userID, book, bookIndex);
-                        update_orderlist(book);
                     }
                 } else if (option1 == 3) {
                     continue;

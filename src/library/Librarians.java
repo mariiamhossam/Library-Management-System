@@ -503,9 +503,8 @@ public class Librarians extends Users {
         
         for (int i = index+1; i < 199; i++) {
             book[bookIndex].orderList[i - 1] = book[bookIndex].orderList[i];
-            book[bookIndex].counter--;
         }
-        
+        book[bookIndex].counter--;
 
     }
 

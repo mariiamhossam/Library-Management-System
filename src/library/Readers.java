@@ -89,7 +89,7 @@ public class Readers extends Users {
                         } else if (option1 == 2 && reader[userIndex].Book_name.equals(book[bookIndex].Name)) {
                             //call return_book function
                             reader[userIndex].Return_book(book, bookIndex);
-                            update_orderlist(book);
+                            update_orderlist(book, reader, admin);
 
                         }
                     } else if (choice == 'n' || choice == 'N') {

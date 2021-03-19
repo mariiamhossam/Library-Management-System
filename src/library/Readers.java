@@ -43,7 +43,6 @@ public class Readers extends Users {
         while (true) {
 
             displayMenu();
-            update_orderlist(book);
             option1 = input.nextInt();
             if (option1 == 1) {
                 System.out.println("PLEASE ENTER BOOK NAME:");
@@ -90,6 +89,7 @@ public class Readers extends Users {
                         } else if (option1 == 2 && reader[userIndex].Book_name.equals(book[bookIndex].Name)) {
                             //call return_book function
                             reader[userIndex].Return_book(book, bookIndex);
+                            update_orderlist(book);
 
                         }
                     } else if (choice == 'n' || choice == 'N') {

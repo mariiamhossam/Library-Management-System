@@ -441,7 +441,6 @@ public class Librarians extends Users {
             empty=true;
             System.out.println("The book " + book[bookIndex].Name + " has no users in it's orderlist.");
             System.out.println("_______________________________________"); 
-            //return;
         }
         else{
         for (int i = 0; i < book[bookIndex].counter; i++) {

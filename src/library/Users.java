@@ -129,14 +129,14 @@ public abstract class Users {
                 
                 boolean admin_flag = false;
                 for(int ii = 0; ii < 5; ii++)
-                    if(admin[ii].ID == id){
+                    if(admin[ii].getID() == id){
                         admin[ii].isRent = true;
                         admin_flag = true;
                         break;
                     }
                 
                 for(int ii = 0; ii < 100 && !admin_flag; ii++)
-                    if(reader[ii].ID == id){
+                    if(reader[ii].getID() == id){
                         reader[ii].isRent = true;
                         break;
                     }

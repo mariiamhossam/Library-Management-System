@@ -131,6 +131,7 @@ public abstract class Users {
                 for(int ii = 0; ii < 5; ii++)
                     if(admin[ii].getID() == id){
                         admin[ii].isRent = true;
+                        admin[ii].Book_name = book[i].Name;
                         admin_flag = true;
                         break;
                     }
@@ -138,6 +139,7 @@ public abstract class Users {
                 for(int ii = 0; ii < 100 && !admin_flag; ii++)
                     if(reader[ii].getID() == id){
                         reader[ii].isRent = true;
+                        reader[ii].Book_name = book[i].Name;
                         break;
                     }
             

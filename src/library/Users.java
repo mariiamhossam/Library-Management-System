@@ -127,22 +127,19 @@ public abstract class Users {
                 book[i].counter--;
                 j++;
                 
-                boolean User_Flag = false;
-                for(int ii = 0; ii < 100; ii++)
-                {
-                    if(reader[ii].ID == id){
-                        reader[ii].isRent = true;
-                        User_Flag = true;
-                        break;
-                    }
-                }
-                for(int ii = 0; ii < 100 && !User_Flag; ii++)
-                {
+                boolean admin_flag = false;
+                for(int ii = 0; ii < 5; ii++)
                     if(admin[ii].ID == id){
                         admin[ii].isRent = true;
+                        admin_flag = true;
                         break;
                     }
-                }
+                
+                for(int ii = 0; ii < 100 && !admin_flag; ii++)
+                    if(reader[ii].ID == id){
+                        reader[ii].isRent = true;
+                        break;
+                    }
             }
         }
         }

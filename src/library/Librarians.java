@@ -480,8 +480,6 @@ public class Librarians extends Users {
         for (int i = 0; i < 200; i++) {
             if (book[bookIndex].orderList[i] == User_ID) {
                 index = i;
-                System.out.println("Removal is successfully done");
-                System.out.println("_______________________________________");
                 break;
             }
         }
@@ -506,7 +504,9 @@ public class Librarians extends Users {
             book[bookIndex].orderList[i - 1] = book[bookIndex].orderList[i];
         }
         book[bookIndex].counter--;
-
+        
+        System.out.println("Removal is successfully done");
+        System.out.println("_______________________________________");
     }
 
     public boolean Show_lateUsers(Librarians[] admin, Readers[] reader) {

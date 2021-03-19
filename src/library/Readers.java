@@ -73,6 +73,7 @@ public class Readers extends Users {
                                 System.out.println("Sorry, you can't rent the book because you are blocked!");
                             } else if (isrented == true) {
                                 System.out.println("Sorry, you can't rent more than one book");
+                                System.out.println("_______________________________________");
                             } else if (isblocked == false && isrented == false && book[bookIndex].quantity > 0) {
                                 reader[userIndex].rent(bookName, book, bookIndex);
                             } else {

@@ -140,7 +140,7 @@ public abstract class Users {
                         reader[ii].isRent = true;
                         break;
                     }
-            }
+            
         }
         }
     }

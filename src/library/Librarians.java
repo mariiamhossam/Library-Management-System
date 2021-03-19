@@ -47,7 +47,6 @@ public class Librarians extends Users {
         while (true) {
 
             displayMenu();
-            update_orderlist(book);
             option1 = input.nextInt();
             if (option1 == 1) {
 
@@ -131,12 +130,15 @@ public class Librarians extends Users {
                                     bookIndex = searchForBook(bookName, book);
                                     int userID = admin[userIndex].getID();
                                     add_user_to_orderlist(userID, book, bookIndex);
+                                    
                                 }
 
                             }
                         } else if (option1 == 3) {
                             //call return_book function
                             admin[userIndex].Return_book(book, bookIndex);
+                            update_orderlist(book);
+                            
                         }
                     } else if (choice == 'n' || choice == 'N') {
                         System.out.println("_______________________________________");
@@ -219,6 +221,7 @@ public class Librarians extends Users {
                     } else if (option1 == 2) {
                         //call remove from order list function
                         remove_user_orderlist(userID, book, bookIndex);
+                        update_orderlist(book);
                     }
                 } else if (option1 == 3) {
                     continue;
@@ -427,10 +430,11 @@ public class Librarians extends Users {
             }
         }
 
-        System.out.println("Removal is successfully completed");
+        System.out.println("Removal is successfully done");
         System.out.println("_______________________________________");
     }
 
+    
     public boolean show_orderlist(Readers[] reader, Librarians[] admin, Books[] book, int bookIndex) {
         boolean empty=false;
         if (book[bookIndex].counter == 0) {
@@ -473,9 +477,11 @@ public class Librarians extends Users {
 
     public void remove_user_orderlist(int User_ID, Books[] book, int bookIndex) {
         int index = -1;
-        for (int i = 1; i < 200; i++) {
+        for (int i = 0; i < 200; i++) {
             if (book[bookIndex].orderList[i] == User_ID) {
                 index = i;
+                System.out.println("Removal is successfully done");
+                System.out.println("_______________________________________");
                 break;
             }
         }
@@ -495,10 +501,12 @@ public class Librarians extends Users {
         if (index == 199) {
             book[bookIndex].orderList[199] = 0;
         }
-        for (int i = index; i < 199; i++) {
+        
+        for (int i = index+1; i < 199; i++) {
             book[bookIndex].orderList[i - 1] = book[bookIndex].orderList[i];
+            book[bookIndex].counter--;
         }
-        book[bookIndex].counter--;
+        
 
     }
 
@@ -521,7 +529,7 @@ public class Librarians extends Users {
         return isFound;
     }
 
-    public void Block(Librarians admin[], Readers reader[]) {
+    public void Block(Librarians[] admin, Readers[] reader) {
         LocalDate now = LocalDate.now();
         for (int i = 0; i < 100; i++) {
             if (i < 5) {
@@ -542,6 +550,8 @@ public class Librarians extends Users {
             }
         }
     }
+    
+    
 
    
 }

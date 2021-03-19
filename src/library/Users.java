@@ -120,8 +120,7 @@ public abstract class Users {
     protected void update_orderlist(Books[] book, Readers[] reader, Librarians[] admin) {
         for (int i = 0; i < 200; i++) {
             int j = 1;
-            if(book[i].quantity>0){
-            while (book[i].counter > 0) {
+            while (book[i].counter > 0 && book[i].quantity>0 && j < 200) {
                 int id = book[i].orderList[j - 1];
                 book[i].orderList[j - 1] = book[i].orderList[j];
                 book[i].counter--;

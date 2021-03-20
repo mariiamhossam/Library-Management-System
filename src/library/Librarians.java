@@ -271,25 +271,7 @@ public class Librarians extends Users {
         System.out.println("The Book is Successfully Added!");
     }
     
-//     public void remove_book(Books[] book,int bookIndex) 
-//    {
-//        
-//        for (int i = bookIndex; i < 200-1; i++) 
-//        {
-//            if(book[i].Name=="empty")
-//            {
-//               break;
-//            }
-//            else
-//            {
-//               book[i] = book[i+1];
-//            }
-//        }
-//        
-//        System.out.println("The Book is Successfully Removed!");
-//        System.out.println("_______________________________________");
-//       
-//    }
+
 
          public void remove_book(Books[] book,int bookIndex) {
          String Rmv_book=book[bookIndex].Name;
@@ -387,10 +369,17 @@ public class Librarians extends Users {
         while (true) {
             char c1 = '0';
             char c = r[indx].getCellPhone().charAt(0);
+            length=r[indx].getCellPhone().length();
+            
             if (c != c1) {
                 System.out.println("PLEASE ENTER ANOTHE PHONE NUMBER STARTS WITH ZERO: ");
                 r[indx].setCellPhone(input2.next());
-            } else if (c == c1) {
+            }
+                if(length!=11){
+                    System.out.println("PLEASE ENTER A CORRECT NUMBER PHONE NOT LESS THAN 11 DIGITS AND NOT MORE THAN 11: ");
+                r[indx].setCellPhone(input2.next());
+                }
+             else if (c == c1&&length==11) {
                 break;
             }
         }
